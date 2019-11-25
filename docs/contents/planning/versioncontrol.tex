@@ -1,0 +1,13 @@
+\subsection{Versionskontrolle}
+
+Als Versionskontrolle wird \emph{git} verwendet. Der Source-Code, sowie diese Dokumentation, werden dabei öffentlich auf einer \emph{GitHub} Repository\footnote{Repository verfügbar unter \href{https://github.com/IBZTI2018/TI3-WT-SA}{github.com/IBZTI2018/TI3-WT-SA}} zur Verfügung gestellt.
+
+Als Grundlage für die Struktur der Versionskontrolle wird eine vereinfachte Form von GitFlow\footnote{GitFlow wird unter anderem \href{https://datasift.github.io/gitflow/IntroducingGitFlow.html}{hier} beschrieben} verwendet.
+
+Da bereits bekannt ist, dass bei dieser Case-Study keine Wartungsphase nach Entwicklungs-Abschluss folgen wird, werden die \emph{release-branches}, sowie der \emph{hotfix-branch} weggelassen.
+
+Die Entwicklung einzelner Features geschieht in eigenen \emph{feature-branches}, welche nach Abschluss einer Aufgabe in den \emph{development} Branch gemerged werden. Nach Abschluss einer Iteration (Sprint), wird der \emph{development} Branch in den \emph{master} Branch gemerged und die Änderungen somit mittels \emph{webtechdeploy} direkt auf den Server deployed.
+
+Nach Abschluss jeder Iteration wird zudem ein Tag mit der entsprechenden Iterationsnummer (\emph{sprint-n}) gesetzt. Somit ist der Zustand des Projekts nach jeder Iteration jederzeit nachvollziehbar.
+
+Zur Qualitätskontrolle müssen in \emph{feature-branches} entwickelte Features immer vom jeweils anderen Projektpartner gemerged werden. Zuvor wird mittels der GitHub Merge-Request UI eine Code-Review vorgenommen und allfällige Unstimmigkeiten angemerkt.
