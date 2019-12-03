@@ -1,0 +1,36 @@
+{
+    "name": "ibzti18w/wtsa1",
+    "description": "IBZ TI3 WebTechnologie Case-Study 1",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sven Gehring",
+            "email": "sven.gehring@student.ibz.ch"
+        },
+        {
+            "name": "André Glatzl",
+            "email": "andre.glatzlg@student.ibz.ch"
+        }
+    ],
+
+    "require": {
+
+    },
+
+    "autoload": {
+        "psr-4": {
+            "WTSA1\\": "src/"
+        }
+    },
+
+    "autoload-dev": {
+        "psr-4": {
+            "WTSA1\\": "tests/"
+        }
+    },
+
+    "config": {
+    	"optimize-autoloader": true
+    }
+}

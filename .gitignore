@@ -7,3 +7,6 @@ docs/index.pdf
 docs/index.synctex.gz
 docs/index.toc
 docs/index.out
+
+# Ignore PHP composer dependencies
+vendor/
