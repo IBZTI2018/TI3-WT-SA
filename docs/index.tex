@@ -2,6 +2,9 @@
 
 \usepackage[german]{babel}
 \usepackage{hyperref}
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.16}
 
 \begin{document}
 \selectlanguage{german}
@@ -15,6 +18,12 @@
 \input{contents/abstract.tex}
 \end{abstract}
 
+% TODO: Remove this for final version!
+\vspace{3cm}
+\begin{center}
+  \textcolor{red}{\textbf{\emph{Entwurf für Zwischentermine!}}}
+\end{center}
+
 \clearpage
 \tableofcontents
 \clearpage
@@ -27,5 +36,16 @@
 \input{contents/planning/technologies.tex}
 \input{contents/planning/devenv.tex}
 \input{contents/planning/versioncontrol.tex}
+
+\section{Projektorganisation}
+\input{contents/organization/timetable.tex}
+\input{contents/organization/userstories.tex}
+
+\section{Anhänge}
+\subsection{Externe Verweise}
+\begin{itemize}
+  \item Öffentliche Repository: \href{https://github.com/IBZTI2018/TI3-WT-SA}{github.com/IBZTI2018/TI3-WT-SA}
+  \item Ausgelieferte Version: \href{https://ibz-wtsa1.dev.cybrox.eu/}{ibz-wtsa1.dev.cybrox.eu}
+\end{itemize}
 
 \end{document}
