@@ -10,3 +10,6 @@ docs/index.out
 
 # Ignore PHP composer dependencies
 vendor/
+
+# Ignore PHP Unit Cache
+.phpunit.result.cache
