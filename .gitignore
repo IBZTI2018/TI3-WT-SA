@@ -13,3 +13,5 @@ vendor/
 
 # Ignore PHP Unit Cache
 .phpunit.result.cache
+
+.DS_Store

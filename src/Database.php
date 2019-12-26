@@ -13,7 +13,7 @@ class Database {
     private function __construct()
     {
         define('DBHost', 'mysql');
-        define('DBPort', 3306);
+        define('DBPort', getenv('MYSQL_PORT'));
         define('DBName', getenv('MYSQL_DATABASE'));
         define('DBUser', getenv('MYSQL_USER'));
         define('DBPassword', getenv('MYSQL_PASSWORD'));

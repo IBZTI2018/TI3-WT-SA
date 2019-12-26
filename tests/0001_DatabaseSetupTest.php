@@ -3,17 +3,20 @@ use PHPUnit\Framework\TestCase;
 
 class DatabaseSetupTest extends TestCase
 {
-    public function testPushAndPop()
+    public function testUserTableExists()
     {
-        $stack = [];
-        $this->assertSame(0, count($stack));
+        $query = \WTSA1\Database::getInstance()->query("SELECT 1 FROM `user` LIMIT 1;");
+        $this->assertSame(1, $query[0][1]);
+    }
 
-        array_push($stack, 'foso');
-        $this->assertSame('foo', $stack[count($stack)-1]);
-        $this->assertSame(1, count($stack));
-
-        $this->assertSame('foo', array_pop($stack));
-        $this->assertSame(0, count($stack));
+    public function testUsernameConstraint()
+    {
+        $this->expectException(PDOException::class);
+        $query1 = \WTSA1\Database::getInstance()->query("
+        INSERT INTO `user` (username, password) VALUES
+            ('username', 'password'),
+            ('username', 'password');
+        ");
     }
 }
 ?>

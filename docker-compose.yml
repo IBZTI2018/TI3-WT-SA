@@ -20,16 +20,12 @@ php:
 
 mysql:
   image: mysql:5.7
-  volumes_from:
-    - data
-  env_file:
-    - 'mysql.env'
-
-data:
-  image: mysql:5.7
   volumes:
     - /var/lib/mysql
-  command: "true"
+  ports:
+    - 3306:3306
+  env_file:
+    - 'mysql.env'
 
 phpmyadmin:
   image: adminer
