@@ -5,6 +5,7 @@
 ##########
 
 use WTSA1\Engines\Database;
+use WTSA1\Engines\Hasher\PBKDF2;
 
 // Autoload source and dependencies via composer
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -21,7 +22,7 @@ function dbinit()
   CREATE TABLE `user` (
       `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
       `username` varchar(255) NOT NULL DEFAULT '',
-      `password` varchar(255) NOT NULL DEFAULT '',
+      `password` text NOT NULL,
       PRIMARY KEY (`id`)
     ) DEFAULT CHARSET=latin1;
   ");
@@ -34,27 +35,30 @@ function dbinit()
 
   // 4. Seeding user table
   echo "Seeding user table...\r\n";
+  $dummyData = array(
+    array('J_duudDun',      PBKDF2::generate('asdqwe123qweasyd')),
+    array('Ligneous',       PBKDF2::generate('asdqwe123qweasyd')),
+    array('ArsovEphod',     PBKDF2::generate('asdqwe123qweasyd')),
+    array('Autophagy',      PBKDF2::generate('asdqwe123qweasyd')),
+    array('Arguseyed',      PBKDF2::generate('asdqwe123qweasyd')),
+    array('Blauwbok',       PBKDF2::generate('asdqwe123qweasyd')),
+    array('Winsome',        PBKDF2::generate('asdqwe123qweasyd')),
+    array('Abattoir',       PBKDF2::generate('asdqwe123qweasyd')),
+    array('Frangipani',     PBKDF2::generate('asdqwe123qweasyd')),
+    array('Casco11Esker',   PBKDF2::generate('asdqwe123qweasyd')),
+    array('Polysarcous',    PBKDF2::generate('asdqwe123qweasyd')),
+    array('Acrimony',       PBKDF2::generate('asdqwe123qweasyd')),
+    array('Abderian',       PBKDF2::generate('asdqwe123qweasyd')),
+    array('LesterdPatzer',  PBKDF2::generate('asdqwe123qweasyd')),
+    array('Moleskin',       PBKDF2::generate('asdqwe123qweasyd')),
+    array('Luminous',       PBKDF2::generate('asdqwe123qweasyd')),
+    array('Goodfella',      PBKDF2::generate('asdqwe123qweasyd')),
+    array('Musteline',      PBKDF2::generate('asdqwe123qweasyd')),
+    array('Imbricate',      PBKDF2::generate('asdqwe123qweasyd'))
+  );
   Database::getInstance()->query("
   INSERT INTO `user` (username, password) VALUES
-    ('J_duudDun', 'asdqwe123qweasyd'),
-    ('Ligneous', 'asdqwe123qweasyd'),
-    ('ArsovEphod', 'asdqwe123qweasyd'),
-    ('Autophagy', 'asdqwe123qweasyd'),
-    ('Arguseyed', 'asdqwe123qweasyd'),
-    ('Blauwbok', 'asdqwe123qweasyd'),
-    ('Winsome', 'asdqwe123qweasyd'),
-    ('Abattoir', 'asdqwe123qweasyd'),
-    ('Frangipani', 'asdqwe123qweasyd'),
-    ('Casco11Esker', 'asdqwe123qweasyd'),
-    ('Polysarcous', 'asdqwe123qweasyd'),
-    ('Acrimony', 'asdqwe123qweasyd'),
-    ('Abderian', 'asdqwe123qweasyd'),
-    ('LesterdPatzer', 'asdqwe123qweasyd'),
-    ('Moleskin', 'asdqwe123qweasyd'),
-    ('Luminous', 'asdqwe123qweasyd'),
-    ('Goodfella', 'asdqwe123qweasyd'),
-    ('Musteline', 'asdqwe123qweasyd'),
-    ('Imbricate', 'asdqwe123qweasyd');
+    " . implode(", ", array_map(function($item) { return "('".$item[0]."','".$item[1]."')"; }, $dummyData)) . "
   ;
   ");
   
@@ -62,7 +66,7 @@ function dbinit()
   echo "\r\n";
 }
 
-if (php_sapi_name() == "cli") {
+if (defined("PHPUNIT_WTSA1_TESTSUITE") != true) {
   dbinit();
 }
 

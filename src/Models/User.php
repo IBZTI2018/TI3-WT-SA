@@ -2,6 +2,7 @@
 
 namespace WTSA1\Models;
 use WTSA1\Engines\Database;
+use WTSA1\Engines\Hasher\PBKDF2;
 
 class User {
     private $_id;
@@ -47,11 +48,28 @@ class User {
 
     public static function login($username, $password) {
         $result = Database::getInstance()->query("
-                SELECT * FROM `user` WHERE username = ? AND password = ?;
+                SELECT * FROM `user` WHERE username = ?;
             ", 
-            array($username, $password)
+            array($username)
         );
-        return self::parse($result);
+
+        $user = self::parse($result);
+
+        if ($user == null) {
+            return null;
+        }
+
+        // PBKDF2 Bundle
+        $bundle = explode("$", $user->getPassword());
+        $algorithm = $bundle[0];
+        $iterations = $bundle[1];
+        $salt = $bundle[2];
+
+        if (PBKDF2::verify($user->getPassword(), $password, $algorithm, $iterations, $salt) != true) {
+            $user = null;
+        }
+
+        return $user;
     }
 
     public static function parse($result) {

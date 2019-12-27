@@ -11,7 +11,7 @@ class Page {
 
 
     /**
-     * Initialize a new view context.
+     * Initialize a new page context.
      */
     public function __construct($template = null) {
         if ($template != null) {

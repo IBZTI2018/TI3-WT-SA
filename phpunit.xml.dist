@@ -10,6 +10,10 @@
         colors="true"
         bootstrap="./vendor/autoload.php">
 
+    <php>
+        <const name="PHPUNIT_WTSA1_TESTSUITE" value="true"/>
+    </php>
+
     <testsuites>
         <testsuite name="WTSA1 - TestSuite">
             <directory>./tests</directory>

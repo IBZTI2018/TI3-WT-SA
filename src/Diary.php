@@ -15,14 +15,18 @@ class Diary
 	public function initRoutes()
 	{
 		// Setup routes
-		Route::add('/', function() {
+		Route::add('/', function() 
+		{
 			(new HomePage())->render();
-		}, 'get');
+		}, 
+		'get');
 
 
-		Route::add('/login', function() {
+		Route::add('/login', function() 
+		{
 			(new LoginPage())->render();
-		}, array('get', 'post'));
+		}, 
+		array('get', 'post'));
 
 		// Run Route
 		Route::run('/');
