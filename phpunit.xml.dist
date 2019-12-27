@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <phpunit 
-    convertWarningsToExceptions="true"
+        convertWarningsToExceptions="true"
         convertNoticesToExceptions="true"
         convertErrorsToExceptions="true"
         backupStaticAttributes="false"
@@ -11,7 +11,7 @@
         bootstrap="./vendor/autoload.php">
 
     <testsuites>
-        <testsuite name="My Project - TestSuite">
+        <testsuite name="WTSA1 - TestSuite">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
