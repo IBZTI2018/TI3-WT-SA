@@ -15,3 +15,6 @@ vendor/
 .phpunit.result.cache
 
 .DS_Store
+
+# Ignore all environment files
+*.env

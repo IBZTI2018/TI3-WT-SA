@@ -18,6 +18,15 @@ class Database {
         define('DBUser', getenv('MYSQL_USER'));
         define('DBPassword', getenv('MYSQL_PASSWORD'));
 
+        if (strlen(DBHost) < 1 || 
+            strlen(DBPort) < 1 || 
+            strlen(DBName) < 1 || 
+            strlen(DBUser) < 1 || 
+            strlen(DBPassword) < 1) 
+        {
+          die("The MYSQL environment variables are not defined!");
+        }
+
         $this->db = new \Db(DBHost, DBPort, DBName, DBUser, DBPassword);
     }
    
