@@ -1,8 +1,0 @@
-#!/bin/bash
-############################################
-# PHP Composer inside php docker container #
-############################################
-
-# Passing arguments from this script to docker exec command
-
-docker-compose exec php composer "$@"

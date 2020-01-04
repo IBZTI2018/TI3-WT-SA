@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# Run php composer inside docker container
+
+docker-compose exec php composer "$@"

@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# Run PHPUnit tests inside docker container
+
+docker-compose exec php vendor/bin/phpunit --debug
