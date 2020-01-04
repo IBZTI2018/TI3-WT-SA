@@ -5,7 +5,7 @@ nginx:
   links:
     - php
   volumes_from:
-    - app
+    - php
 
 php:
   build: ./docker/php/
@@ -13,24 +13,29 @@ php:
     - 9000
   links:
     - mysql
-  volumes_from:
-    - app
+    - test_mysql
+  volumes:
+    - .:/var/www/html
+  env_file:
+    - 'mysql.env'
 
 mysql:
-  image: mysql:latest
-  volumes_from:
-    - data
-  environment:
-    MYSQL_ROOT_PASSWORD: password
-    MYSQL_DATABASE: project
-    MYSQL_USER: admin
-    MYSQL_PASSWORD: password
-
-data:
-  image: mysql:latest
+  image: mysql:5.7
   volumes:
     - /var/lib/mysql
-  command: "true"
+  ports:
+    - 3306:3306
+  env_file:
+    - 'mysql.env'
+
+test_mysql:
+  image: mysql:5.7
+  volumes:
+    - /var/lib/test_mysql
+  ports:
+    - 3307:3307
+  env_file:
+    - 'mysql.env'
 
 phpmyadmin:
   image: adminer
@@ -38,9 +43,3 @@ phpmyadmin:
     - 8080:8080
   links:
     - mysql
-
-app:
-  image: php:7.3-fpm
-  volumes:
-     - .:/var/www/html
-  command: 'true'

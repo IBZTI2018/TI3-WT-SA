@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpunit 
+        convertWarningsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertErrorsToExceptions="true"
+        backupStaticAttributes="false"
+        processIsolation="false"
+        stopOnFailure="false"
+        backupGlobals="false"
+        colors="true"
+        bootstrap="./vendor/autoload.php">
+
+    <php>
+        <const name="PHPUNIT_WTSA1_TESTSUITE" value="true"/>
+    </php>
+
+    <testsuites>
+        <testsuite name="WTSA1 - TestSuite">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+
+</phpunit>

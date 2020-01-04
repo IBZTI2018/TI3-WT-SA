@@ -10,3 +10,11 @@ docs/index.out
 
 # Ignore PHP composer dependencies
 vendor/
+
+# Ignore PHP Unit Cache
+.phpunit.result.cache
+
+.DS_Store
+
+# Ignore all environment files
+*.env
