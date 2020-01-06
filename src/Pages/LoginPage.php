@@ -10,19 +10,19 @@ class LoginPage extends Page {
     protected function get() {}
 
     protected function post() {
-        if (!isset($_REQUEST['username']) || strlen($_REQUEST['username']) < 1) {
-            $this->data['error'] = "Der Username ist leer!";
+        if (empty($_REQUEST['username'])) {
+            $this->data['error'] = "You must provide a username!";
             return;
         }
 
-        if (!isset($_REQUEST['password']) || strlen($_REQUEST['password']) < 1) {
-            $this->data['error'] = "Das Passwort ist leer!";
+        if (empty($_REQUEST['password'])) {
+            $this->data['error'] = "You must provide a password!";
             return;
         }
 
         $user = User::login($_REQUEST['username'], $_REQUEST['password']);
         if (!$user) {
-            $this->data['error'] = "Der Username oder das Passwort ist falsch!";
+            $this->data['error'] = "Login failed, please try again.";
             return;
         }
 
