@@ -8,6 +8,7 @@ use WTSA1\Engines\Route;
 use WTSA1\Models\User;
 use WTSA1\Pages\HomePage;
 use WTSA1\Pages\LoginPage;
+use WTSA1\Pages\RegisterPage;
 
 class Diary
 {
@@ -22,11 +23,9 @@ class Diary
 		'get');
 
 
-		Route::add('/login', function() 
-		{
-			(new LoginPage())->render();
-		}, 
-		array('get', 'post'));
+		// Authorization routes
+		Route::add('/login', function() {(new LoginPage())->render(); }, array('get', 'post'));
+		Route::add('/register', function() {(new RegisterPage())->render(); },  array('get', 'post'));
 
 		// Run Route
 		Route::run('/');
