@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# Show all docker container logs
+
+docker-compose logs -f $@
