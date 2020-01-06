@@ -37,7 +37,13 @@ class User {
         $this->_password = $password;
     }
 
-    public function getById($id) {
+    /**
+     * Get a user from the database by its id
+     * 
+     * @param int $id The id of the user to search for
+     * @return User|null The user object or null if not found
+     */
+    public static function getById($id) {
         $result = Database::getInstance()->query("
                 SELECT * FROM `user` WHERE id = ?
             ",
@@ -46,6 +52,27 @@ class User {
         return self::parse($result);
     }
 
+    /**
+     * Get a user from the database by its name
+     * 
+     * @param string $username The username of the user to search for
+     * @return User|null The user object or null if not found
+     */
+    public static function getByName($username) {
+        $result = Database::getInstance()->query("
+            SELECT * FROM `user` WHERE username = ?
+        ", array($username));
+
+        return self::parse($result);
+    }
+
+    /**
+     * Login with given user credentials
+     * 
+     * @param string $username The username
+     * @param string $password The password
+     * @return User|null The logged in user or null if invalid credentials
+     */
     public static function login($username, $password) {
         $result = Database::getInstance()->query("
                 SELECT * FROM `user` WHERE username = ?;
@@ -55,9 +82,7 @@ class User {
 
         $user = self::parse($result);
 
-        if ($user == null) {
-            return null;
-        }
+        if ($user == null) return null;
 
         // PBKDF2 Bundle
         $bundle = explode("$", $user->getPassword());
@@ -72,7 +97,28 @@ class User {
         return $user;
     }
 
-    public static function parse($result) {
+    /**
+     * Register a new user account with given credentials
+     * 
+     * @param string $username The username
+     * @param string $password The password
+     * @return User|null The registered and logged in user or null in case of error
+     */
+    public static function register($username, $password) {
+        $hashedPassword = PBKDF2::generate($password);
+
+        try {
+            $result = Database::getInstance()->query("
+                INSERT INTO `user` (username, password) VALUES (?, ?)
+            ", array($username, $hashedPassword));
+        } catch (PDOException $e) {
+            return null;
+        }
+
+        return User::login($username, $password);
+    }
+
+    private static function parse($result) {
         if (count($result) > 0) {
             $u = $result[0];
             $user = new User($u['id'], $u['username'], $u['password']);

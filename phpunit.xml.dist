@@ -8,7 +8,7 @@
         stopOnFailure="false"
         backupGlobals="false"
         colors="true"
-        bootstrap="./vendor/autoload.php">
+        bootstrap="./tests/_CustomBootstrap.php">
 
     <php>
         <const name="PHPUNIT_WTSA1_TESTSUITE" value="true"/>

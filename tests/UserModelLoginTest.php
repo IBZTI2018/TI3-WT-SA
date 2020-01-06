@@ -7,7 +7,7 @@ use WTSA1\Engines\Hasher\PBKDF2;
 use WTSA1\Engines\Database;
 use WTSA1\Models\User;
 
-class LoginTest extends TestCase {
+class UserModelLoginTest extends TestCase {
 
     public function testLoginFailsIfUserDoesNotExist() {
         $user = User::login("someuser", "password");
