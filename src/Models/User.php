@@ -43,12 +43,26 @@ class User {
      * @param int $id The id of the user to search for
      * @return User|null The user object or null if not found
      */
-    public function getById($id) {
+    public static function getById($id) {
         $result = Database::getInstance()->query("
                 SELECT * FROM `user` WHERE id = ?
             ",
             array($id)
         );
+        return self::parse($result);
+    }
+
+    /**
+     * Get a user from the database by its name
+     * 
+     * @param string $username The username of the user to search for
+     * @return User|null The user object or null if not found
+     */
+    public static function getByName($username) {
+        $result = Database::getInstance()->query("
+            SELECT * FROM `user` WHERE username = ?
+        ", array($username));
+
         return self::parse($result);
     }
 
@@ -81,6 +95,27 @@ class User {
         }
 
         return $user;
+    }
+
+    /**
+     * Register a new user account with given credentials
+     * 
+     * @param string $username The username
+     * @param string $password The password
+     * @return User|null The registered and logged in user or null in case of error
+     */
+    public static function register($username, $password) {
+        $hashedPassword = PBKDF2::generate($password);
+
+        try {
+            $result = Database::getInstance()->query("
+                INSERT INTO `user` (username, password) VALUES (?, ?)
+            ", array($username, $hashedPassword));
+        } catch (PDOException $e) {
+            return null;
+        }
+
+        return User::login($username, $password);
     }
 
     private static function parse($result) {
