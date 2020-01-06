@@ -37,6 +37,12 @@ class User {
         $this->_password = $password;
     }
 
+    /**
+     * Get a user from the database by its id
+     * 
+     * @param int $id The id of the user to search for
+     * @return User|null The user object or null if not found
+     */
     public function getById($id) {
         $result = Database::getInstance()->query("
                 SELECT * FROM `user` WHERE id = ?
@@ -46,6 +52,13 @@ class User {
         return self::parse($result);
     }
 
+    /**
+     * Login with given user credentials
+     * 
+     * @param string $username The username
+     * @param string $password The password
+     * @return User|null The logged in user or null if invalid credentials
+     */
     public static function login($username, $password) {
         $result = Database::getInstance()->query("
                 SELECT * FROM `user` WHERE username = ?;
@@ -55,9 +68,7 @@ class User {
 
         $user = self::parse($result);
 
-        if ($user == null) {
-            return null;
-        }
+        if ($user == null) return null;
 
         // PBKDF2 Bundle
         $bundle = explode("$", $user->getPassword());
@@ -72,7 +83,7 @@ class User {
         return $user;
     }
 
-    public static function parse($result) {
+    private static function parse($result) {
         if (count($result) > 0) {
             $u = $result[0];
             $user = new User($u['id'], $u['username'], $u['password']);
