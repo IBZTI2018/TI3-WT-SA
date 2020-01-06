@@ -30,6 +30,21 @@ function databaseCreate() {
       ADD CONSTRAINT constr_username UNIQUE (username);
   ");
 
+  echo "Creating `category` table...\r\n";
+  Database::getInstance()->query("
+    CREATE TABLE `category` (
+      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+      `category` varchar(255) NOT NULL DEFAULT '',
+      PRIMARY KEY (`id`)
+    ) DEFAULT CHARSET=latin1;
+  ");
+
+  echo "Adding unique constraint on category table for category field...\r\n";
+  Database::getInstance()->query("
+    ALTER TABLE `category`
+      ADD CONSTRAINT constr_category UNIQUE (category);
+  ");
+
   echo "Done!\r\n";
 }
 

@@ -14,8 +14,14 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 function databaseDrop() {
   
+  echo "Dropping `user`...\r\n";
   Database::getInstance()->query("
     DROP TABLE IF EXISTS `user`
+  ");
+
+  echo "Dropping `category`...\r\n";
+  Database::getInstance()->query("
+    DROP TABLE IF EXISTS `category`
   ");
 
   echo "Done!\r\n";

@@ -42,6 +42,20 @@ function databaseSeed()  {
       ". implode(", ", array_map(function($item) { return "('".$item[0]."','".$item[1]."')"; }, $dummyData)) . "
     ;
   ");
+
+  echo "Seeding category table...\r\n";
+  $dummyData = array(
+    array(1, "Nicht kategorisiert"),
+    array(2, "Ferien"),
+    array(3, "Geburtstag"),
+    array(4, "Familienfest"),
+    array(5, "Ausflug")
+  );
+  Database::getInstance()->query("
+    INSERT INTO `category` (id, category) VALUES
+      ". implode(", ", array_map(function($item) { return "('".$item[0]."','".$item[1]."')"; }, $dummyData)) . "
+    ;
+  ");
   
   echo "Done!\r\n";
 }
