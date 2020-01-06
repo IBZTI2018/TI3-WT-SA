@@ -1,5 +1,0 @@
-#!/bin/bash
-#
-# Run a PHP script inside the docker container
-
-docker-compose exec php php scripts/"$@".php

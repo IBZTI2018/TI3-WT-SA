@@ -39,6 +39,5 @@
     },
 
     "scripts": {
-        "dbinit": "/bin/bash scripts/dbinit.sh"
     }
 }

@@ -1,21 +1,15 @@
 <?php
 
-require_once __DIR__ . "/CustomTestCase.php";
+require_once __DIR__ . '/_CustomTestRunnerHooks.php';
+use PHPUnit\Framework\TestCase;
 
-class PBKDF2Test extends CustomTestCase
-{
-    public function testIsPBKDF2()
-    {
-        // Try to login with userId 15
-        $user = \WTSA1\Models\User::login("Moleskin", "asdqwe123qweasyd");
-        $this->assertStringContainsString("pbkdf2_sha256", $user->getPassword());
-    }
+use WTSA1\Engines\Hasher\PBKDF2;
 
-    public function testDiffHash()
-    {
-        $user15 = \WTSA1\Models\User::login("Moleskin", "asdqwe123qweasyd");
-        $user16 = \WTSA1\Models\User::login("Luminous", "asdqwe123qweasyd");
-        $this->assertNotEquals($user15->getPassword(), $user16->getPassword());
+class PBKDF2Test extends TestCase {
+    public function testHashIsDifferentOnDifferentEncodings() {
+        $hash1 = PBKDF2::generate("password");
+        $hash2 = PBKDF2::generate("password");
+        $this->assertNotEquals($hash1, $hash2);
     }
 }
 ?>

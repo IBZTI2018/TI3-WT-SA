@@ -20,4 +20,7 @@
         </testsuite>
     </testsuites>
 
+    <extensions>
+        <extension class="Vendor\CustomTestRunnerHooks" />
+    </extensions>
 </phpunit>
