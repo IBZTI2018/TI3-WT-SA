@@ -15,7 +15,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 function databaseCreate() {
   
   echo "Creating `user` table...\r\n";
-  Database::getInstance()->query("
+  Database::getInstance()->debugQuery("
     CREATE TABLE `user` (
       `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
       `username` varchar(255) NOT NULL DEFAULT '',
@@ -25,7 +25,7 @@ function databaseCreate() {
   ");
 
   echo "Adding unique constraint on user table for username field...\r\n";
-  Database::getInstance()->query("
+  Database::getInstance()->debugQuery("
     ALTER TABLE `user`
       ADD CONSTRAINT constr_username UNIQUE (username);
   ");

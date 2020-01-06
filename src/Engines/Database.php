@@ -50,6 +50,23 @@ class Database {
       return $this->db->query($query, $params);
     }
 
+    /**
+     * Query the database and output the query details
+     * 
+     * Used for debugging purposes and scripts
+     * @param string $query The query to execute
+     * @param array $params The query parameters
+     * @return void
+     */
+    public function debugQuery($query, $params = null) {
+      $paramDump = array();
+      if (is_array($params)) {
+        foreach($params as $pkey => $pval) array_push($paramDump, $pkey."=".$pval); 
+      }
+
+      echo trim($query) . join($paramDump, " ") . "\n";
+      $this->query($query, $params);
+    }
   }
 
 ?>
