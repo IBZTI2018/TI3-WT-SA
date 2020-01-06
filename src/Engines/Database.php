@@ -2,6 +2,15 @@
 
 namespace WTSA1\Engines;
 
+/**
+ * Enumerable for cleaner naming
+ */
+abstract class DatabaseTestMode {
+  const Enabled = true;
+  const Disabled = false;
+}
+
+
 // General singleton class.
 class Database {
     // Hold the class instance.
@@ -10,7 +19,7 @@ class Database {
     
     // The constructor is private
     // to prevent initiation with outer code.
-    private function __construct($testMode = false)
+    private function __construct($testMode = DatabaseTestMode::Disabled)
     {
         define('DBHost', $testMode ? 'test_mysql' : 'mysql');
         define('DBPort', getenv('MYSQL_PORT'));
@@ -30,42 +39,47 @@ class Database {
         $this->db = new \Db(DBHost, DBPort, DBName, DBUser, DBPassword);
     }
    
-    // The object is created from within the class itself
-    // only if the class has no instance.
-    public static function getInstance($testMode = false)
-    {
-      if (self::$instance == null)
-      {
-        self::$instance = $testMode ? new Database(true) : new Database(false);
-      }
-   
+    /**
+     * Get the singleton database instance
+     * 
+     * This will create an instance in case it does not exist
+     * @param bool $testMode Wether or not to enable test mode
+     * @todo The parameter is only applied sometimes. - Confusing?
+     */
+    public static function getInstance($testMode = DatabaseTestMode::Disabled) {
+      if (self::$instance == null) self::$instance = new Database($testMode);
       return self::$instance;
     }
 
-    public static function setTestMode() {
-      Database::getInstance(true);
-    }
-
+    /**
+     * Query the database
+     * 
+     * @param string $query The query to execute
+     * @param array $params The query parameters
+     */
     public function query($query, $params = null) {
       return $this->db->query($query, $params);
     }
 
     /**
-     * Query the database and output the query details
-     * 
-     * Used for debugging purposes and scripts
-     * @param string $query The query to execute
-     * @param array $params The query parameters
-     * @return void
+     * Start a new database transaction
      */
-    public function debugQuery($query, $params = null) {
-      $paramDump = array();
-      if (is_array($params)) {
-        foreach($params as $pkey => $pval) array_push($paramDump, $pkey."=".$pval); 
-      }
+    public function startTransaction() {
+      $this->db->beginTransaction();
+    }
 
-      echo trim($query) . join($paramDump, " ") . "\n";
-      $this->query($query, $params);
+    /**
+     * Commit an existing transaction
+     */
+    public function commit() {
+      $this->db->commit();
+    }
+
+    /**
+     * Roll back an existing transaction
+     */
+    public function rollback() {
+      $this->db->rollback();
     }
   }
 

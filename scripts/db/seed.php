@@ -37,7 +37,7 @@ function databaseSeed()  {
     array('Musteline',      PBKDF2::generate('asdqwe123qweasyd')),
     array('Imbricate',      PBKDF2::generate('asdqwe123qweasyd'))
   );
-  Database::getInstance()->debugQuery("
+  Database::getInstance()->query("
     INSERT INTO `user` (username, password) VALUES
       ". implode(", ", array_map(function($item) { return "('".$item[0]."','".$item[1]."')"; }, $dummyData)) . "
     ;

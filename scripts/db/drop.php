@@ -14,7 +14,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 function databaseDrop() {
   
-  Database::getInstance()->debugQuery("
+  Database::getInstance()->query("
     DROP TABLE IF EXISTS `user`
   ");
 
