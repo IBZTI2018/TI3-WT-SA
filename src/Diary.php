@@ -26,7 +26,7 @@ class Diary
 		// Authorization routes
 		Route::add('/login', function() {(new LoginPage())->render(); }, array('get', 'post'));
 		Route::add('/register', function() {(new RegisterPage())->render(); },  array('get', 'post'));
-		Route::add('/diary-entry', function() {(new DiaryEntryPage())->render(); },  array('get', 'post'));
+		Route::add('/view', function() {(new DiaryEntryPage())->render(); },  array('get', 'post'));
 
 		// Run Route
 		Route::run('/');
