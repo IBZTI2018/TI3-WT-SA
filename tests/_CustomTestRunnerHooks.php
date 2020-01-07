@@ -11,6 +11,7 @@ use PHPUnit\Runner\BeforeTestHook;
 use PHPUnit\Runner\AfterTestHook;
 use \WTSA1\Engines\DatabaseTestMode;
 use \WTSA1\Engines\Database;
+use \WTSA1\Engines\Session;
 
 final class CustomTestRunnerHooks implements BeforeFirstTestHook, AfterLastTestHook, BeforeTestHook, AfterTestHook {
   public function executeBeforeFirstTest(): void {
@@ -32,6 +33,7 @@ final class CustomTestRunnerHooks implements BeforeFirstTestHook, AfterLastTestH
 
   public function executeAfterTest($test, $time): void {
     Database::getInstance()->rollBack();
+    Session::getInstance()->clearUser();
   }
 }
 
