@@ -6,9 +6,9 @@ use WTSA1\Engines\Session;
 use WTSA1\Middlewares\AuthenticationMiddleware;
 use WTSA1\Models\DiaryEntry;
 
-class DiaryEntryPage extends Page {
+class CreatePage extends Page {
     use AuthenticationMiddleware;
-    protected $template = 'DiaryEntry.phtml';
+    protected $template = 'Create.phtml';
 
     protected function get() {}
 

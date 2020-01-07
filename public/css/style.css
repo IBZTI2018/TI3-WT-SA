@@ -22,6 +22,10 @@
     background-color: #7C7972;
 }
 
+* {
+    font-family: 'Caveat', cursive;
+}
+
 body {
     height: 100%;
     margin: 0;
@@ -59,7 +63,7 @@ body {
 }
 
 .diary-body {
-    width: 100%;
+    max-width: 100%;
     height: 100%;
     overflow: auto;
 }
@@ -96,12 +100,21 @@ body {
     background-color: #CCC;
 }
 
+.diary-body.diary-open {
+    margin-left: 12px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 0px;
+    background-image: url('/public/assets/notebook.png');
+}
+
 .diary-sidepage {
     border-top-right-radius: 5px;
     flex-direction: row;
     width: 2px;
     height: 100%;
-    background: #FFF;
+    background: #DEDEDE;
     border-right: 1px solid #999;
     border-top: 1px solid #999;
 }
@@ -153,7 +166,7 @@ body {
 .diary-bottompage {
     width: 100%;
     height: 2px;
-    background: #FFF;
+    background: #DEDEDE;
     border-left: 10px solid #ECEBE4;
     border-right: 1px solid #999;
     border-bottom: 1px solid #999;
@@ -246,6 +259,55 @@ body {
     background: #A52A2A !important;
     color: #FFF !important;
     cursor: pointer;
+}
+
+/**
+ * User Interface
+ */
+
+.diary-logged-in {
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    display: flex;   
+}
+
+.diary-username {
+    flex-direction: row;
+    flex: 1;
+    text-align: left;
+}
+
+.diary-username h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.8em;
+    color: #A52A2A;
+}
+
+.diary-logout {
+    flex-direction: row;
+    max-width: 30%;
+    text-align: right;
+}
+
+.diary-logout input {
+    margin: 0;
+    padding: 10px;
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    font-size: 1.3em;
+    color: #A52A2A;
+}
+
+.diary-logout input:hover,
+.diary-logout input:focus {
+    display: inline-block;
+    cursor: pointer;
+    border-left: 1px dotted #A52A2A !important;
+    border-radius: 50%;
 }
 
 .error {

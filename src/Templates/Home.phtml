@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Diary's HomePage</h1>
-    <form action="/logout" method="post">
-    <input type="submit" value="Logout">
-    </form>
-    <br>
-    <h2>Hello <?php echo $this->data["user"]->getUsername(); ?> </h2>
-    <a href="/view">Create a new diary entry</a>
-</body>
-</html>
+<div class="diary-logged-in">
+    <div class="diary-username">
+        <h2><?=t($this->data["user"]->getUsername())?>'s diary</h2>
+    </div>
+    <div class="diary-logout">
+        <form action="/logout" method="post">
+            <input type="submit" value="Close Diary →">
+        </form>
+    </div>
+</div>
+<div class="diary-contents">
+    hello
+</div>

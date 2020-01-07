@@ -9,24 +9,18 @@ use WTSA1\Pages\HomePage;
 use WTSA1\Pages\LoginPage;
 use WTSA1\Pages\LogoutPage;
 use WTSA1\Pages\RegisterPage;
-use WTSA1\Pages\DiaryEntryPage;
+use WTSA1\Pages\CreatePage;
 
 class Diary
 {
 
-	public function initRoutes()
-	{
-		// Setup routes
-		Route::add('/', function() 
-		{
-			(new HomePage())->render();
-		}, 
-		'get');
-
+	public function initRoutes() {
+		// Diary routes
+		Route::add('/', function() {(new HomePage())->render(); }, 'get');
+		Route::add('/create', function() {(new CreatePage())->render(); },  array('get', 'post'));
 
 		// Authorization routes
 		Route::add('/register', function() {(new RegisterPage())->render(); },  array('get', 'post'));
-		Route::add('/view', function() {(new DiaryEntryPage())->render(); },  array('get', 'post'));
 		Route::add('/login', function() {(new LoginPage())->render(); }, array('get', 'post'));
 		Route::add('/logout', function() {(new LogoutPage())->render(); }, array('post'));
 
