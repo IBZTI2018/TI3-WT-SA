@@ -32,13 +32,17 @@ class Page {
 
     /**
      * Render the template, returning it's content.
+     * 
+     * @param array $bindings Optional bindings. Supports keys: title
      * @return string The rendered template.
      */
-    public function render() {
+    public function render($bindings = array()) {
         extract($this->data);
 
         ob_start();
+        include( TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'Components/Header.phtml');
         include( TEMPLATE_DIR . DIRECTORY_SEPARATOR . $this->template);
+        include( TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'Components/Footer.phtml');
         $content = ob_get_contents();
         ob_end_clean();
         echo $content;
