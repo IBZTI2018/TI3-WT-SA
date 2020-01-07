@@ -47,10 +47,10 @@ function databaseSeed()  {
 
   echo "Seeding diary entry table...\r\n";
   $data = array(
-    array(1, 1, "2020-01-01", "Ein eintrag"),
-    array(1, 2, "2020-01-01", "Noch ein Eintrag"),
-    array(1, 2, "2020-01-01", "Noch einer"),
-    array(1, 3, "2020-01-01", "Und noch einer"),
+    array(1, 1, "2020-01-01", "Ein eintrag mit einem relativ langen text, der irgend einmal umgebrochen werden muss, weil er sonst viel zu lang wäre!"),
+    array(1, 2, "2020-01-02", "Noch ein Eintrag"),
+    array(1, 2, "2020-01-03", "Noch einer"),
+    array(1, 3, "2020-01-04", "Und noch einer"),
     array(3, 1, "2020-01-01", "Bewertungswitz")
   );
   Database::getInstance()->query("

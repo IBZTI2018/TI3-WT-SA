@@ -9,5 +9,18 @@
     </div>
 </div>
 <div class="diary-contents">
-    hello
+    <div class="diary-create">
+        <a href="/create">Create →</a>
+    </div>
+    
+    <div class="diary-entries">
+        <?php if (count($this->data['entries']) == 0) {?>
+            <p class="diary-empty">You don't have any entries in your diary yet :/</p>    
+        <?php } ?>
+
+        <?php foreach($this->data['entries'] as $entry) { ?>
+            <h4><?=t($entry->getFormattedPublishDate())?></h4>
+            <p><?=t($entry->getContent())?></p>
+        <?php } ?>
+    </div>
 </div>

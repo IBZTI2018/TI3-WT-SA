@@ -22,6 +22,10 @@ class DiaryEntry {
     public function getPublishDate() { return $this->_publish_date; }
     public function getContent() { return $this->_content; }
 
+    public function getFormattedPublishDate() {
+        return date('d.m.Y', strtotime($this->_publish_date));
+    }
+
     // Setters
     public function setId($id) { 
         $this->_id = $id; 
