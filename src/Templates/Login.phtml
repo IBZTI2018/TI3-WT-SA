@@ -7,13 +7,13 @@
         </span>
 
         <form action="/login" method="POST">
-            <input type="text" name="username" value="<?=$_REQUEST['username']?>" placeholder="Username">
+            <input type="text" name="username" value="<?=t($_REQUEST['username'])?>" placeholder="Username">
             <br>
             <input type="text" name="password" placeholder="Password">
             <br>
             <input type="submit" value="Open">
         </form>
 
-        <div class="error"><?=$this->data['error']; ?></div>
+        <div class="error"><?=t($this->data['error'])?></div>
     </div>
 </div>
