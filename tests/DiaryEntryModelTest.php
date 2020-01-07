@@ -9,11 +9,11 @@ use WTSA1\Models\DiaryEntry;
 class DiaryEntryModelTest extends TestCase {
 
     public function setUp(): void {
-        \WTSA1\Engines\Database::getInstance()->query("
+        Database::getInstance()->query("
           INSERT INTO `user` (id, username, password) VALUES
             (1, 'tmp', 'tmp');
         ");
-        \WTSA1\Engines\Database::getInstance()->query("
+        Database::getInstance()->query("
           INSERT INTO `category` (id, category) VALUES
             (1, 'tmp');
         ");
@@ -21,14 +21,14 @@ class DiaryEntryModelTest extends TestCase {
 
     public function testForeignKeyViolationUserIdOnDiaryEntry() {
         $this->expectException(PDOException::class);
-        \WTSA1\Engines\Database::getInstance()->query("
+        Database::getInstance()->query("
           INSERT INTO `diary_entry` (user_id, category_id, publish_date, content) VALUES
             (9999999, 1, '2020-01-01', 'constraint');
         ");
       }
     
       public function testForeignKeyAcceptanceUserIdOnDiaryEntry() {
-        \WTSA1\Engines\Database::getInstance()->query("
+        Database::getInstance()->query("
           INSERT INTO `diary_entry` (user_id, category_id, publish_date, content) VALUES
             (1, 1, '2020-01-01', 'constraint');
         ");
@@ -37,14 +37,14 @@ class DiaryEntryModelTest extends TestCase {
     
       public function testForeignKeyViolationCategoryIdOnDiaryEntry() {
         $this->expectException(PDOException::class);
-        \WTSA1\Engines\Database::getInstance()->query("
+        Database::getInstance()->query("
           INSERT INTO `diary_entry` (user_id, category_id, publish_date, content) VALUES
             (1, 9999999, '2020-01-01', 'constraint');
         ");
       }
     
       public function testForeignKeyAcceptanceCategoryIdOnDiaryEntry() {
-        \WTSA1\Engines\Database::getInstance()->query("
+        Database::getInstance()->query("
           INSERT INTO `diary_entry` (user_id, category_id, publish_date, content) VALUES
             (1, 1, '2020-01-01', 'constraint');
         ");
