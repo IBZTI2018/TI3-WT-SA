@@ -359,6 +359,13 @@ body {
     margin: 0;
 }
 
+.diary-category {
+    font-weight: normal;
+    display: inline-block;
+    padding-left: 20px;
+    color: #777;
+}
+
 .error {
     font-weight: bold;
     color: #DC143C;

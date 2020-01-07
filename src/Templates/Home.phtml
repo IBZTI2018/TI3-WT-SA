@@ -19,7 +19,12 @@
         <?php } ?>
 
         <?php foreach($this->data['entries'] as $entry) { ?>
-            <h4><?=t($entry->getFormattedPublishDate())?></h4>
+            <h4>
+                <?=t($entry->getFormattedPublishDate())?>
+                <span class="diary-category">
+                    <?=t($entry->getCategory()->getCategory())?>
+                </span>
+            </h4>
             <p><?=t($entry->getContent())?></p>
         <?php } ?>
     </div>
