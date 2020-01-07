@@ -33,7 +33,7 @@ class Category {
      * Get a category object from the database by its id
      * 
      * @param int $id The id of the category to search for
-     * @return Category|null The user object or null if not found
+     * @return Category|null The category object or null if not found
      */
     public static function getById($id) {
         $result = Database::getInstance()->query("
@@ -42,6 +42,21 @@ class Category {
             array($id)
         );
         return self::parse($result);
+    }
+
+    /**
+     * Get all categories from database
+     * 
+     * @return Category[] Array of category objects or empty
+     */
+    public static function getAll() {
+        $results = Database::getInstance()->query("
+                SELECT * FROM `category` ORDER BY id
+            "
+        );
+        return array_map(function($obj) {
+            return new Category($obj['id'], $obj['category']);
+        }, $results);
     }
 
     private static function parse($result) {

@@ -14,6 +14,7 @@ trait AuthenticationMiddleware {
             header('Location: /login');
             die();
         }
+        parent::__construct();
     }
 
     public function render() {
