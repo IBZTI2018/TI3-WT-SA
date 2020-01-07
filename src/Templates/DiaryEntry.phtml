@@ -19,7 +19,7 @@ use WTSA1\Models\Category;
         <pre class="error"><?= $this->data['error']; ?></pre>
     <?php } ?>
 
-    <form action="/diary-entry" method="POST">
+    <form action="/view" method="POST">
         <label for="publish_date">Publish Date:</label>
         <input type="date" name="publish_date" value="<?= date('Y-m-d') ?>">
         <br>
