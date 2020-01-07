@@ -12,5 +12,14 @@ class DatabaseConstaintsTest extends TestCase {
         ('username', 'password');
     ");
   }
+
+  public function testCategoryUniqueConstraint() {
+    $this->expectException(PDOException::class);
+    \WTSA1\Engines\Database::getInstance()->query("
+      INSERT INTO `category` (category) VALUES
+        ('samecategory'),
+        ('samecategory');
+    ");
+  }
 }
 ?>
