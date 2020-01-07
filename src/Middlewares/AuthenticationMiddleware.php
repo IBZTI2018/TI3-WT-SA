@@ -16,7 +16,7 @@ trait AuthenticationMiddleware {
         }
     }
 
-    public function render() {
+    public function render($bindings = array()) {
         $this->data = array_merge($this->data, array(
             "user" => Session::getInstance()->getUser()
         ));

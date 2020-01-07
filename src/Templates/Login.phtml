@@ -1,70 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<div class="diary-content table">
+    <div class="diary-auth">
+        <h1>Open Diary</h1>
 
-    <link rel="shortcut icon" href="/public/assets/favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/public/css/style.css">
-    
-    <title>Diary - Login</title>
-</head>
-<body>
-    <div class="diary-wrapper">
-        <div class="diary-wrapper-inner">
-            <div class="diary-wrapper-flex">
-                <div class="diary-container">
-                    <div class="diary-body">
-                        <div class="diary-content table">
-                            <div class="diary-auth">
-                                <h1>Open Diary</h1>
+        <span>
+            (<a href="/register">Create new diary →</a>)
+        </span>
 
-                                <span>
-                                    (<a href="/register">Create new diary →</a>)
-                                </span>
+        <form action="/login" method="POST">
+            <input type="text" name="username" value="<?=$_REQUEST['username']?>" placeholder="Username">
+            <br>
+            <input type="text" name="password" placeholder="Password">
+            <br>
+            <input type="submit" value="Open">
+        </form>
 
-                                <form action="/login" method="POST">
-                                    <input type="text" name="username" value="<?=$_REQUEST['username']?>" placeholder="Username">
-                                    <br>
-                                    <input type="text" name="password" placeholder="Password">
-                                    <br>
-                                    <input type="submit" value="Open">
-                                </form>
-
-                                <div class="error"><?=$this->data['error']; ?></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="diary-side">
-                    <div class="diary-sidepage"></div>
-                    <div class="diary-sidepage"></div>
-                    <div class="diary-sidepage"></div>
-                    <div class="diary-sidepage"></div>
-                    <div class="diary-sidepage"></div>
-                    <div class="diary-sidepage"></div>
-                    <div class="diary-sidepage"></div>
-                    <div class="diary-sidepage"></div>
-                    <div class="diary-sidecloser"></div>
-                </div>
-            </div>
-            <div class="diary-bottom">
-                <div class="diary-bottom-pages">
-                    <div class="diary-bottompage"></div>
-                    <div class="diary-bottompage"></div>
-                    <div class="diary-bottompage"></div>
-                    <div class="diary-bottompage"></div>
-                    <div class="diary-bottompage"></div>
-                    <div class="diary-bottompage"></div>
-                    <div class="diary-bottompage"></div>
-                    <div class="diary-bottompage"></div>
-                    <div class="diary-bottomcloser"></div>
-                </div>
-                <div class="diary-bottom-spacer"></div>
-            </div>
-        </div>
+        <div class="error"><?=$this->data['error']; ?></div>
     </div>
-</body>
-</html>
+</div>
