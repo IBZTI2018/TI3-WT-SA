@@ -23,10 +23,10 @@ class PageLogoutTest extends TestCase {
             VALUES (1, 'someuser', '".PBKDF2::generate("password")."');
         ");
 
-        User::login("someuser", "password");
+        Session::getInstance()->setUser(User::login("someuser", "password"));
         $this->assertEquals(Session::getInstance()->getUser()->getUsername(), "someuser");
 
-        $testee = new PageLogoutTestee();
+        $testee = new PageLogoutTestee();   
         $_REQUEST = array();
         $testee->testPost();
 
