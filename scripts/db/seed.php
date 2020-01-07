@@ -17,25 +17,9 @@ function databaseSeed()  {
 
   echo "Seeding user table...\r\n";
   $dummyData = array(
-    array('J_duudDun',      PBKDF2::generate('asdqwe123qweasyd')),
-    array('Ligneous',       PBKDF2::generate('asdqwe123qweasyd')),
-    array('ArsovEphod',     PBKDF2::generate('asdqwe123qweasyd')),
-    array('Autophagy',      PBKDF2::generate('asdqwe123qweasyd')),
-    array('Arguseyed',      PBKDF2::generate('asdqwe123qweasyd')),
-    array('Blauwbok',       PBKDF2::generate('asdqwe123qweasyd')),
-    array('Winsome',        PBKDF2::generate('asdqwe123qweasyd')),
-    array('Abattoir',       PBKDF2::generate('asdqwe123qweasyd')),
-    array('Frangipani',     PBKDF2::generate('asdqwe123qweasyd')),
-    array('Casco11Esker',   PBKDF2::generate('asdqwe123qweasyd')),
-    array('Polysarcous',    PBKDF2::generate('asdqwe123qweasyd')),
-    array('Acrimony',       PBKDF2::generate('asdqwe123qweasyd')),
-    array('Abderian',       PBKDF2::generate('asdqwe123qweasyd')),
-    array('LesterdPatzer',  PBKDF2::generate('asdqwe123qweasyd')),
-    array('Moleskin',       PBKDF2::generate('asdqwe123qweasyd')),
-    array('Luminous',       PBKDF2::generate('asdqwe123qweasyd')),
-    array('Goodfella',      PBKDF2::generate('asdqwe123qweasyd')),
-    array('Musteline',      PBKDF2::generate('asdqwe123qweasyd')),
-    array('Imbricate',      PBKDF2::generate('asdqwe123qweasyd'))
+    array('sgehring', PBKDF2::generate('password')),
+    array('aglatzl', PBKDF2::generate('password')),
+    array('aschild', PBKDF2::generate('password'))
   );
   Database::getInstance()->query("
     INSERT INTO `user` (username, password) VALUES
@@ -45,7 +29,7 @@ function databaseSeed()  {
 
   echo "Seeding category table...\r\n";
   $dummyData = array(
-    array(1, "Nicht kategorisiert"),
+    array(1, "Unkategorisiert"),
     array(2, "Ferien"),
     array(3, "Geburtstag"),
     array(4, "Familienfest"),

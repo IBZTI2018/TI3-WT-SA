@@ -21,22 +21,20 @@ class Database {
     // to prevent initiation with outer code.
     private function __construct($testMode = DatabaseTestMode::Disabled)
     {
-        define('DBHost', $testMode ? 'test_mysql' : 'mysql');
-        define('DBPort', getenv('MYSQL_PORT'));
-        define('DBName', getenv('MYSQL_DATABASE'));
-        define('DBUser', getenv('MYSQL_USER'));
-        define('DBPassword', getenv('MYSQL_PASSWORD'));
+        $assumedDbHost = $testMode ? 'test_mysql' : 'mysql';
 
-        if (strlen(DBHost) < 1 || 
-            strlen(DBPort) < 1 || 
-            strlen(DBName) < 1 || 
-            strlen(DBUser) < 1 || 
-            strlen(DBPassword) < 1) 
-        {
-          die("The MYSQL environment variables are not defined!");
-        }
+        $dbHost = (!empty(getenv('MYSQL_HOST'))) ? getenv('MYSQL_HOST') : $assumedDbHost;
+        $dbPort = getenv('MYSQL_PORT');
+        $dbName = getenv('MYSQL_DATABASE');
+        $dbUser = getenv('MYSQL_USER');
+        $dbPass = getenv('MYSQL_PASSWORD');
 
-        $this->db = new \Db(DBHost, DBPort, DBName, DBUser, DBPassword);
+        if (empty($dbPort)) die("MYSQL_PORT not defined!");
+        if (empty($dbName)) die("MYSQL_DATABASE not defined!");
+        if (empty($dbUser)) die("MYSQL_USER not defined!");
+        if (empty($dbPass)) die("MYSQL_PASSWORD not defined!");
+
+        $this->db = new \Db($dbHost, $dbPort, $dbName, $dbUser, $dbPass);
     }
    
     /**
