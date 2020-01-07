@@ -45,6 +45,34 @@ function databaseCreate() {
       ADD CONSTRAINT constr_category UNIQUE (category);
   ");
 
+  echo "Creating `diary_entry` table...\r\n";
+  Database::getInstance()->query("
+    CREATE TABLE `diary_entry` (
+      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+      `user_id` int(11) unsigned NOT NULL,
+      `category_id` int(11) unsigned NOT NULL DEFAULT '1',
+      `publish_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      `content` varchar(1000) NOT NULL DEFAULT '',
+      PRIMARY KEY (`id`)
+    ) DEFAULT CHARSET=latin1;  
+  ");
+
+  echo "Adding foreign key relationship between diary_entry.user_id and user.id...\r\n";
+  Database::getInstance()->query("
+    ALTER TABLE `diary_entry`
+    ADD CONSTRAINT `fk_diary_entry.user_id__user.id`
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    ON DELETE CASCADE ON UPDATE CASCADE;
+  ");
+
+  echo "Adding foreign key relationship between diary_entry.category_id and category.id...\r\n";
+  Database::getInstance()->query("
+    ALTER TABLE `diary_entry`
+    ADD CONSTRAINT `fk_diary_entry.category_id__category.id`
+    FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
+    ON DELETE CASCADE ON UPDATE CASCADE;
+  ");
+
   echo "Done!\r\n";
 }
 

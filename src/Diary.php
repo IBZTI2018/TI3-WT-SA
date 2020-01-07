@@ -5,11 +5,11 @@ namespace WTSA1;
 use WTSA1\Engines\Database;
 use WTSA1\Engines\Session;
 use WTSA1\Engines\Route;
-use WTSA1\Models\User;
 use WTSA1\Pages\HomePage;
 use WTSA1\Pages\LoginPage;
 use WTSA1\Pages\LogoutPage;
 use WTSA1\Pages\RegisterPage;
+use WTSA1\Pages\DiaryEntryPage;
 
 class Diary
 {
@@ -26,6 +26,7 @@ class Diary
 
 		// Authorization routes
 		Route::add('/register', function() {(new RegisterPage())->render(); },  array('get', 'post'));
+		Route::add('/view', function() {(new DiaryEntryPage())->render(); },  array('get', 'post'));
 		Route::add('/login', function() {(new LoginPage())->render(); }, array('get', 'post'));
 		Route::add('/logout', function() {(new LogoutPage())->render(); }, array('post'));
 
