@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# Show all container statuses
+
+docker-compose ps

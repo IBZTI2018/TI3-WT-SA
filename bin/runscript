@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# Run a PHP script inside the docker container
+
+docker-compose exec php bash -c "AUTORUN_SCRIPT=true php scripts/\"$@\".php"
