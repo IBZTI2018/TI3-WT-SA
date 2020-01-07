@@ -2,6 +2,7 @@
 
 namespace WTSA1\Models;
 use WTSA1\Engines\Database;
+use WTSA1\Engines\Session;
 use WTSA1\Models\User;
 use WTSA1\Models\Category;
 
@@ -52,6 +53,25 @@ class DiaryEntry {
         $this->_category_id = $category_id;
         $this->_publish_date = $publish_date;
         $this->_content = $content;
+    }
+
+    /**
+     * List all diary entries for the current user
+     * @return array(DiaryEntry) List of diary entries
+     */
+    public static function getEntriesForCurrentUser() {
+        if (Session::getInstance()->getUser() == null) return array();
+
+        $user_id = Session::getInstance()->getUser()->getId();
+        $result = Database::getInstance()->query("
+            SELECT * FROM `diary_entry` WHERE user_id = ?
+            ORDER BY `publish_date` DESC;
+        ",array($user_id));
+
+        if (!is_array($result)) return array();
+        return array_map(function($item) {
+            return DiaryEntry::parse(array($item));
+        }, $result);
     }
 
     /**
