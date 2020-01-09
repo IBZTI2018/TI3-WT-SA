@@ -2,6 +2,8 @@
 
 namespace WTSA1\Pages;
 
+use \WTSA1\Engines\Session;
+
 class Page {
     /**
      * Template being rendered.
@@ -39,10 +41,15 @@ class Page {
     public function render($bindings = array()) {
         extract($this->data);
 
+        // Add binding for internal page if user is logged in
+        if (Session::getInstance()->getUser() != null) {
+            $bindings["bodyModifier"] = "diary-open";
+        }
+
         ob_start();
-        include( TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'Components/Header.phtml');
-        include( TEMPLATE_DIR . DIRECTORY_SEPARATOR . $this->template);
-        include( TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'Components/Footer.phtml');
+        include(TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'Components/Header.phtml');
+        include(TEMPLATE_DIR . DIRECTORY_SEPARATOR . $this->template);
+        include(TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'Components/Footer.phtml');
         $content = ob_get_contents();
         ob_end_clean();
         echo $content;

@@ -6,9 +6,9 @@ use WTSA1\Engines\Database;
 use WTSA1\Engines\Session;
 use WTSA1\Models\Category;
 use WTSA1\Models\User;
-use WTSA1\Pages\DiaryEntryPage;
+use WTSA1\Pages\CreatePage;
 
-class PageDiaryEntryTestee extends DiaryEntryPage {
+class PageCreateTestee extends CreatePage {
     public function testPost() {
         $this->post();
     }
@@ -18,7 +18,7 @@ class PageDiaryEntryTestee extends DiaryEntryPage {
     }
 }
 
-class PageDiaryEntryTest extends TestCase {
+class PageCreateTest extends TestCase {
 
     public function setUp(): void {
         Session::getInstance()->setUser(User::register("test", "test"));
@@ -38,14 +38,14 @@ class PageDiaryEntryTest extends TestCase {
     }
 
     public function testCreatesErrorWhenPublishDateEmpty() {
-        $testee = new PageDiaryEntryTestee();
+        $testee = new PageCreateTestee();
         $_REQUEST = array();
         $testee->testPost();
         $this->assertEquals($testee->dumpData()["error"], "You must specify a publish date!");
     }
 
     public function testCreatesErrorWhenCategoryEmpty() {
-        $testee = new PageDiaryEntryTestee();
+        $testee = new PageCreateTestee();
         $_REQUEST = array(
             "publish_date" => "2020-01-01"
         );
@@ -54,7 +54,7 @@ class PageDiaryEntryTest extends TestCase {
     }
 
     public function testCreatesErrorWhenContentEmpty() {
-        $testee = new PageDiaryEntryTestee();
+        $testee = new PageCreateTestee();
         $_REQUEST = array(
             "publish_date" => "2020-01-01",
             "category" => 1
@@ -64,7 +64,7 @@ class PageDiaryEntryTest extends TestCase {
     }
 
     public function testCreatesErrorWhenContentIsBigger1000() {
-        $testee = new PageDiaryEntryTestee();
+        $testee = new PageCreateTestee();
         $_REQUEST = array(
             "publish_date" => "2020-01-01",
             "category" => 1,
@@ -75,7 +75,7 @@ class PageDiaryEntryTest extends TestCase {
     }
 
     public function testCreatesSuccessfully() {
-        $testee = new PageDiaryEntryTestee();
+        $testee = new PageCreateTestee();
         $_REQUEST = array(
             "publish_date" => "2020-01-01",
             "category" => 1,
