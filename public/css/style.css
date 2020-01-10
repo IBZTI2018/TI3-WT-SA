@@ -34,6 +34,7 @@ body {
     background-repeat: repeat;
     background-color: #C3D0AB;
     font-family: 'Caveat', cursive;
+    overflow: hidden;
 }
 
 .diary-wrapper {
@@ -288,7 +289,6 @@ body {
 
 .diary-logout {
     flex-direction: row;
-    max-width: 30%;
     text-align: right;
 }
 
