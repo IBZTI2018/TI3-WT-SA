@@ -34,6 +34,7 @@ body {
     background-repeat: repeat;
     background-color: #C3D0AB;
     font-family: 'Caveat', cursive;
+    overflow: hidden;
 }
 
 .diary-wrapper {
