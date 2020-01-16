@@ -1,2 +1,89 @@
 \subsection{User-Stories}
-[...]
+Nachfolgend werden sämtliche bearbeiteten User-Stories mit ihren Acceptance-Criterias aufgelistet.
+
+
+\subsubsection*{\#2 Nutzerdaten in der Datenbank speichern}
+Als Systemadministrator will ich Nutzerdaten in der Datenbank speichern können, um ein Verzeichnis von Tagebuchnutzern anzulegen. Dafür soll für jeden Nutzer mindestens der Benutzername, sowie das Passwort gespeichert werden.
+  
+\noindent
+- Als Systemadministartor kann ich die Datenbank mit einem Setup-Script aufsetzen.\\
+- Als Systemadministrator kann ich einen Benutzer in der Datenbank via adminer hinzufügen.\\
+- Es kann kein Benutzername doppelt benutzt werden.
+
+
+\subsubsection*{\#3 Anmelden mit Benutzerdaten}
+Als Endnutzer möchte ich mich über einen Login-Screen anmelden können, um die Applikation zu nutzen und ein tolles Tagebuch zu schreiben.
+
+\noindent
+- Beim Aufrufen der Applikation erscheint ein Login-Bildschirm.\\
+- Als Benutzer kann ich mich mit meinen Benutzername und Passwort einloggen.\\
+- Als Benutzer möchte ich eine informative Fehlermeldung erhalten, wenn ich falsche Zugangsdaten eingebe.\\
+- Nach erfolgreichem Login möchte ich weiter geleitet werden.
+
+
+\subsubsection*{\#4 Registrieren mit neuen Benutzerdaten}
+Als neuer Enduser möchte ich mich registrieren können um mit den bereits bestehenden Benutzern zusammen den Dienst nutzen zu können.
+
+\noindent
+- Als Nutzer kann ich auf der Login-Seite einen neuen Account erstellen.\\
+- Für das Erstellen eines neuen Accounts muss ich einen Benutzernamen und ein Passwort eingeben.\\
+- Zum Schutz vor Vertippen muss das Passwort zwei mal eingegeben werden.\\
+- Stimmen die Passwörter nicht überein, oder ist ein Feld leer, erscheint eine Fehlermeldung.\\
+- Nach dem Registrieren werde ich wie ein eingeloggter Benutzer auf die interne Seite weitergeleitet.
+
+
+\subsubsection*{\#5 Passwörter mit pbkdf2 hashen}
+Als Systemadministrator will ich, dass Passwörter in der Datenbank nur gehasht gespeichert werden, um unsere Sicherheitsstandards zu erfüllen.
+
+\noindent
+- Passwörter sind in der Datenbank nur in pbkdf2 gehashter Form gespeichert.\\
+- Login und Registrierung funktionieren weiterhin.
+
+
+\subsubsection*{\#10 Datenbank-Reset Hook für Deployment}
+Als Systemadministrator möchte ich, dass die Datenbank bei einem Deployment zurückgesetzt und mit neuen Demo-Daten geseedet wird, damit immer eine Demo-Version des Projekts verfügbar ist.
+
+\noindent
+- Datenbank wird bei deployment zurückgesetzt und geseedet
+
+
+\subsubsection*{\#11 Neuen Tagebucheintrag erfassen}
+Als Benutzer möchte ich neue Tagebucheinträge erstellen können, um meine Erlebnisse festzuhalten. Ein Eintrag soll dabei ein Datum, einen Text (bis 1000 Zeichen) und eine Kategorie enthalten.
+
+\noindent
+- Nutzer kann nach dem Einloggen einen Link anklicken um einen neuen Eintrag zu erstellen.\\
+- Nutzer kann ein Datum auswählen, an dem der Eintrag erstellt werden soll.\\
+- Nutzer kann einen Text eingeben, der gespeichert werden soll.\\
+- Nutzer kann eine Kategorie auswählen, zu der der Eintrag gehört.\\
+- Nutzer kann nur seine selbst erstellten Einträge sehen.
+
+
+\subsubsection*{\#12 Kategorien erstellen}
+Als Benutzer möchte ich meinen Tagebucheintrag einer Kategorie zuordnen können, um Ordnung in meinem Tagebuch zu halten.
+
+\noindent
+- Kategorie-Tabelle existiert und hat Standard-Kategorien
+
+
+\subsubsection*{\#13 Ausloggen unterstützen}
+Als Benutzer möchte ich mich ausloggen können, um mein Tagebuch vor neugierigen Menschen zu schützen.
+
+\noindent
+- Eingeloggter Nutzer kann sich ausloggen
+- Nach dem Ausloggen ist ein Nutzer nicht mehr eingeloggt
+
+
+\subsubsection*{\#14 Grundlegendes Design}
+Als Benutzer möchte ich, dass das Tagebuch ein halbwegs schönes und zeitgemässes Design besitzt, damit es angenehm zu verwenden ist. (Timebox: 2h)
+
+\noindent
+- Tagebuch muss ein grundlegendes Grid-Design besitzen
+
+
+\subsubsection*{\#15 Anzeigen von Einträgen}
+Als Benutzer möchte ich meine bestehenden Einträge anzeigen können, damit ich mein Tagebuch lesen kann.
+
+\noindent
+- Benutzer kann seine erstellten Einträge einsehen\\
+- Benutzer kann seine erstellten Einträge nicht bearbeiten\\
+- Benutzer kann nur seine eigenen Einträge sehen
