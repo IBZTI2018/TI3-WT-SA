@@ -25,7 +25,7 @@ class PageLoginTest extends TestCase {
         $testee = new PageLoginTestee();
         $_REQUEST = array();
         $testee->testPost();
-        $this->assertEquals($testee->dumpData()["error"], "You must provide a username!");
+        $this->assertEquals($testee->dumpData()["error"], "Bitte gib ein Username ein!");
     }
 
     public function testCreatesErrorWhenPasswordEmpty() {
@@ -34,7 +34,7 @@ class PageLoginTest extends TestCase {
             "username" => "someuser"
         );
         $testee->testPost();
-        $this->assertEquals($testee->dumpData()["error"], "You must provide a password!");
+        $this->assertEquals($testee->dumpData()["error"], "Bitte gib ein Passwort ein!");
     }
 
     public function testCreatesErrorWhenCredentialsAreInvalid() {
@@ -44,7 +44,7 @@ class PageLoginTest extends TestCase {
             "password" => "password"
         );
         $testee->testPost();
-        $this->assertEquals($testee->dumpData()["error"], "Login failed, please try again.");
+        $this->assertEquals($testee->dumpData()["error"], "Login fehlgeschlagen. Bitte probiere es nochmal!");
     }
 
     public function testLogsInWithValidCredentials() {

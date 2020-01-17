@@ -25,7 +25,7 @@ class PageRegisterTest extends TestCase {
         $testee = new PageRegisterTestee();
         $_REQUEST = array();
         $testee->testPost();
-        $this->assertEquals($testee->dumpData()["error"], "You must specify a username!");
+        $this->assertEquals($testee->dumpData()["error"], "Bitte gib ein Username ein!");
     }
 
     public function testCreatesErrorWhenPasswordEmpty() {
@@ -34,7 +34,7 @@ class PageRegisterTest extends TestCase {
             "username" => "someuser"
         );
         $testee->testPost();
-        $this->assertEquals($testee->dumpData()["error"], "You must specify a password!");
+        $this->assertEquals($testee->dumpData()["error"], "Bitte gib ein Passwort ein!");
     }
 
     public function testCreatesErrorWhenPasswordsDontMatch() {
@@ -45,7 +45,7 @@ class PageRegisterTest extends TestCase {
             "passwordrep" => "password2"
         );
         $testee->testPost();
-        $this->assertEquals($testee->dumpData()["error"], "Passwords don't match!");
+        $this->assertEquals($testee->dumpData()["error"], "Die Passwörter stimmen nicht überein!");
     }
 
     public function testCreatesErrorWhenUsernameAlreadyTaken() {
@@ -61,7 +61,7 @@ class PageRegisterTest extends TestCase {
             "passwordrep" => "password"
         );
         $testee->testPost();
-        $this->assertEquals($testee->dumpData()["error"], "Username is already taken!");
+        $this->assertEquals($testee->dumpData()["error"], "Der angegebene Username wird bereits verwendet!");
     }
 
     public function testCreatesUserWithValidCredentialsAndLogsIn() {

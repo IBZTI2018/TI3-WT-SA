@@ -14,22 +14,22 @@ class CreatePage extends Page {
 
     protected function post() {
         if (empty($_REQUEST['publish_date'])) {
-            $this->data['error'] = "You must specify a publish date!";
+            $this->data['error'] = "Du musst ein Veröffentlichungsdatum angeben!";
             return;
         }
 
         if (empty($_REQUEST['category'])) {
-            $this->data['error'] = "You must choose a category!";
+            $this->data['error'] = "Du musst eine Kategorie auswählen!";
             return;
         }
 
         if (empty($_REQUEST['content'])) {
-            $this->data['error'] = "You must write some content!";
+            $this->data['error'] = "Du musst ein Inhalt schreiben!";
             return;
         }
 
         if (strlen($_REQUEST['content']) > 1000) {
-            $this->data['error'] = "Your content can't have more than 1000 characters!";
+            $this->data['error'] = "Dein Inhalt darf nicht mehr als 1000 Charaktere betragen!";
             return;
         }
 

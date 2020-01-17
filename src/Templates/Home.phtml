@@ -1,21 +1,21 @@
 <div class="diary-logged-in">
     <div class="diary-username">
-        <h2><?=t($this->data["user"]->getUsername())?>'s diary</h2>
+        <h2><?=t($this->data["user"]->getUsername())?>'s Tagebuch</h2>
     </div>
     <div class="diary-logout">
         <form action="/logout" method="post">
-            <input type="submit" value="Close Diary →">
+            <input type="submit" value="Tagebuch schliessen →">
         </form>
     </div>
 </div>
 <div class="diary-contents">
     <div class="diary-create">
-        <a href="/create">Create →</a>
+        <a href="/create">Eintrag schreiben →</a>
     </div>
     
     <div class="diary-entries">
         <?php if (count($this->data['entries']) == 0) {?>
-            <p class="diary-empty">You don't have any entries in your diary yet :/</p>    
+            <p class="diary-empty">Dein Tagebuch mangelt an Abenteuer :/</p>    
         <?php } ?>
 
         <?php foreach($this->data['entries'] as $entry) { ?>

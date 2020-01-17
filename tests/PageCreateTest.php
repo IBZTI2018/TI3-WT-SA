@@ -41,7 +41,7 @@ class PageCreateTest extends TestCase {
         $testee = new PageCreateTestee();
         $_REQUEST = array();
         $testee->testPost();
-        $this->assertEquals($testee->dumpData()["error"], "You must specify a publish date!");
+        $this->assertEquals($testee->dumpData()["error"], "Du musst ein Veröffentlichungsdatum angeben!");
     }
 
     public function testCreatesErrorWhenCategoryEmpty() {
@@ -50,7 +50,7 @@ class PageCreateTest extends TestCase {
             "publish_date" => "2020-01-01"
         );
         $testee->testPost();
-        $this->assertEquals($testee->dumpData()["error"], "You must choose a category!");
+        $this->assertEquals($testee->dumpData()["error"], "Du musst eine Kategorie auswählen!");
     }
 
     public function testCreatesErrorWhenContentEmpty() {
@@ -60,7 +60,7 @@ class PageCreateTest extends TestCase {
             "category" => 1
         );
         $testee->testPost();
-        $this->assertEquals($testee->dumpData()["error"], "You must write some content!");
+        $this->assertEquals($testee->dumpData()["error"], "Du musst ein Inhalt schreiben!");
     }
 
     public function testCreatesErrorWhenContentIsBigger1000() {
@@ -71,7 +71,7 @@ class PageCreateTest extends TestCase {
             "content" => str_repeat("$", 1001)
         );
         $testee->testPost();
-        $this->assertEquals($testee->dumpData()["error"], "Your content can't have more than 1000 characters!");
+        $this->assertEquals($testee->dumpData()["error"], "Dein Inhalt darf nicht mehr als 1000 Charaktere betragen!");
     }
 
     public function testCreatesSuccessfully() {
