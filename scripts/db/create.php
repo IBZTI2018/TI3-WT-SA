@@ -53,6 +53,7 @@ function databaseCreate() {
       `category_id` INT(11) unsigned NOT NULL DEFAULT '1',
       `publish_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
       `content` VARCHAR(1000) NOT NULL DEFAULT '',
+      `image` LONGBLOB DEFAULT NULL, 
       PRIMARY KEY (`id`)
     ) DEFAULT CHARSET=latin1;  
   ");
