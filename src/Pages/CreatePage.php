@@ -29,7 +29,7 @@ class CreatePage extends Page {
         }
 
         if (strlen($_REQUEST['content']) > 1000) {
-            $this->data['error'] = "Dein Inhalt darf nicht mehr als 1000 Charaktere betragen!";
+            $this->data['error'] = "Dein Inhalt darf nicht mehr als 1000 Zeichen betragen!";
             return;
         }
 
@@ -37,8 +37,13 @@ class CreatePage extends Page {
         $category_id = $_REQUEST['category'];
         $publish_date = $_REQUEST['publish_date'];
         $content = $_REQUEST['content'];
+        $image = NULL;
 
-        Entry::create($user_id, $category_id, $publish_date, $content);
+        if (key_exists("image", $_FILES) && !empty($_FILES["image"]["tmp_name"])) {
+            $image = file_get_contents($_FILES["image"]["tmp_name"]);
+        }
+
+        Entry::create($user_id, $category_id, $publish_date, $content, $image);
 
         if (defined("PHPUNIT_WTSA1_TESTSUITE") != true) {
             header("Location: /");

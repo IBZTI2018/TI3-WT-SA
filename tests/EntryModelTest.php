@@ -87,5 +87,18 @@ class EntryModelTest extends TestCase {
         ");
         $this->assertNull(null);
     }
+
+    public function testImageInfoIsEncodedCorrectlyWithMimeType() {
+      // NOTE: This assumes tests are always run in the docker container as intended
+      //       The model must be used here or any `'` in the blob must be escaped.
+      $imageBlob = file_get_contents("/var/www/html/tests/fixtures/image.png");
+      Entry::create(1, 1, '2020-01-01', 'content', $imageBlob);
+
+      Session::getInstance()->setUser(User::login("someuser", "password"));
+      $entries = Entry::getEntriesForCurrentUser();
+      $formatted = $entries[0]->getEncodedImage();
+
+      $this->assertEquals($formatted, "data:image/png;base64,".base64_encode($imageBlob));
+    }
 }
 ?>

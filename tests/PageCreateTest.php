@@ -71,7 +71,7 @@ class PageCreateTest extends TestCase {
             "content" => str_repeat("$", 1001)
         );
         $testee->testPost();
-        $this->assertEquals($testee->dumpData()["error"], "Dein Inhalt darf nicht mehr als 1000 Charaktere betragen!");
+        $this->assertEquals($testee->dumpData()["error"], "Dein Inhalt darf nicht mehr als 1000 Zeichen betragen!");
     }
 
     public function testCreatesSuccessfully() {
@@ -83,6 +83,24 @@ class PageCreateTest extends TestCase {
         );
         $testee->testPost();
         $this->assertArrayNotHasKey("error", $testee->dumpData());
+
+        $count = Database::getInstance()->query("SELECT COUNT(*) FROM entries;");
+        $this->assertEquals($count[0]["COUNT(*)"], 1);
+    }
+
+    public function testCreatesSuccessfullyWithOptionalImage() {
+        $testee = new PageCreateTestee();
+        $_REQUEST = array(
+            "publish_date" => "2020-01-01",
+            "category" => 1,
+            "content" => str_repeat("$", 999),
+            "image" => "thisblobisnotvalidbutitisstoredinthedatabase"
+        );
+        $testee->testPost();
+        $this->assertArrayNotHasKey("error", $testee->dumpData());
+        
+        $count = Database::getInstance()->query("SELECT COUNT(*) FROM entries;");
+        $this->assertEquals($count[0]["COUNT(*)"], 1);
     }
 }
 ?>

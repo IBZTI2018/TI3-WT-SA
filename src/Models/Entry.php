@@ -12,6 +12,7 @@ class Entry {
     private $_category_id;
     private $_publish_date;
     private $_content;
+    private $_image;
 
     // Getters
     public function getId() { return $this->_id; }
@@ -21,9 +22,16 @@ class Entry {
     public function getCategory() { return Category::getById($this->getCategoryId()); }
     public function getPublishDate() { return $this->_publish_date; }
     public function getContent() { return $this->_content; }
+    public function getImage() { return $this->_image; }
 
     public function getFormattedPublishDate() {
         return date('d.m.Y', strtotime($this->_publish_date));
+    }
+
+    public function getEncodedImage() {
+        if (empty($this->_image)) return "";
+        $fileInfo = getimagesizefromstring($this->_image);
+        return "data:".$fileInfo["mime"].";base64,".base64_encode($this->_image);
     }
 
     // Setters
@@ -42,6 +50,9 @@ class Entry {
     public function setContent($content) {
         $this->_content = $content;
     }
+    public function setImage($image) {
+        $this->_image = $image;
+    }
 
     // Functions
 
@@ -50,13 +61,15 @@ class Entry {
         $user_id = null,
         $category_id = null,
         $publish_date = null,
-        $content = null
+        $content = null,
+        $image = null
     ) {
         $this->_id = $id;
         $this->_user_id = $user_id;
         $this->_category_id = $category_id;
         $this->_publish_date = $publish_date;
         $this->_content = $content;
+        $this->_image = $image;
     }
 
     /**
@@ -101,16 +114,16 @@ class Entry {
      * @param int $category_id The id of the Category
      * @param string $publish_date The publish date under the format `Y-m-d`, ex: 2019-01-31
      * @param string $content The content of the diary entry
+     * @param string $image The binary blob of the attached image
      * @return bool
      */
-    public static function create($user_id, $category_id, $publish_date, $content)
+    public static function create($user_id, $category_id, $publish_date, $content, $image)
     {
         try {
             $result = Database::getInstance()->query("
-                    INSERT INTO entries (user_id, category_id, publish_date, content) VALUES (?, ?, ?, ?)
-                ",
-                array($user_id, $category_id, $publish_date, $content)
-            );
+                INSERT INTO entries (user_id, category_id, publish_date, content, image)
+                VALUES (?, ?, ?, ?, ?)
+            ", array($user_id, $category_id, $publish_date, $content, $image));
         } catch (PDOException $e) {
             return false;
         }
@@ -120,7 +133,14 @@ class Entry {
     private static function parse($result) {
         if (count($result) > 0) {
             $obj = $result[0];
-            $diary = new Entry($obj['id'], $obj['user_id'], $obj['category_id'], $obj['publish_date'], $obj['content']);
+            $diary = new Entry(
+                $obj['id'], 
+                $obj['user_id'], 
+                $obj['category_id'], 
+                $obj['publish_date'], 
+                $obj['content'],
+                $obj['image']
+            );
             return $diary;
         }
         return null;

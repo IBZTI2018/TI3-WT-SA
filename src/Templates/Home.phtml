@@ -15,7 +15,7 @@
     
     <div class="diary-entries">
         <?php if (count($this->data['entries']) == 0) {?>
-            <p class="diary-empty">Dein Tagebuch mangelt an Abenteuer :/</p>    
+            <p class="diary-empty">Deinem Tagebuch mangelt es an Abenteuern :/</p>    
         <?php } ?>
 
         <?php foreach($this->data['entries'] as $entry) { ?>
@@ -25,7 +25,13 @@
                     <?=t($entry->getCategory()->getCategory())?>
                 </span>
             </h4>
-            <p><?=t($entry->getContent())?></p>
+            <p>
+                <?php if ($entry->getImage()) { ?>
+                    <img src="<?=$entry->getEncodedImage()?>" alt="">
+                <?php } ?>
+
+                <?=t($entry->getContent())?>
+            </p>
         <?php } ?>
     </div>
 </div>
