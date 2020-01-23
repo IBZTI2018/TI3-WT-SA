@@ -4,7 +4,7 @@ namespace WTSA1\Pages;
 
 use WTSA1\Engines\Session;
 use WTSA1\Middlewares\AuthenticationMiddleware;
-use WTSA1\Models\DiaryEntry;
+use WTSA1\Models\Entry;
 
 class CreatePage extends Page {
     use AuthenticationMiddleware;
@@ -38,7 +38,7 @@ class CreatePage extends Page {
         $publish_date = $_REQUEST['publish_date'];
         $content = $_REQUEST['content'];
 
-        DiaryEntry::create($user_id, $category_id, $publish_date, $content);
+        Entry::create($user_id, $category_id, $publish_date, $content);
 
         if (defined("PHPUNIT_WTSA1_TESTSUITE") != true) {
             header("Location: /");

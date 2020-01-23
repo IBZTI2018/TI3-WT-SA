@@ -17,9 +17,9 @@ function databaseCreate() {
   echo "Creating `users` table...\r\n";
   Database::getInstance()->query("
     CREATE TABLE `users` (
-      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-      `username` varchar(255) NOT NULL DEFAULT '',
-      `password` text NOT NULL,
+      `id` INT(11) unsigned NOT NULL AUTO_INCREMENT,
+      `username` VARCHAR(255) NOT NULL DEFAULT '',
+      `password` TEXT NOT NULL,
       PRIMARY KEY (`id`)
     ) DEFAULT CHARSET=latin1;
   ");
@@ -33,8 +33,8 @@ function databaseCreate() {
   echo "Creating `category` table...\r\n";
   Database::getInstance()->query("
     CREATE TABLE `categories` (
-      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-      `category` varchar(255) NOT NULL DEFAULT '',
+      `id` INT(11) unsigned NOT NULL AUTO_INCREMENT,
+      `category` VARCHAR(255) NOT NULL DEFAULT '',
       PRIMARY KEY (`id`)
     ) DEFAULT CHARSET=latin1;
   ");
@@ -48,11 +48,11 @@ function databaseCreate() {
   echo "Creating `entries` table...\r\n";
   Database::getInstance()->query("
     CREATE TABLE `entries` (
-      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-      `user_id` int(11) unsigned NOT NULL,
-      `category_id` int(11) unsigned NOT NULL DEFAULT '1',
-      `publish_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      `content` varchar(1000) NOT NULL DEFAULT '',
+      `id` INT(11) unsigned NOT NULL AUTO_INCREMENT,
+      `user_id` INT(11) unsigned NOT NULL,
+      `category_id` INT(11) unsigned NOT NULL DEFAULT '1',
+      `publish_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      `content` VARCHAR(1000) NOT NULL DEFAULT '',
       PRIMARY KEY (`id`)
     ) DEFAULT CHARSET=latin1;  
   ");

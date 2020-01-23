@@ -7,9 +7,9 @@ use WTSA1\Engines\Hasher\PBKDF2;
 use WTSA1\Engines\Database;
 use WTSA1\Engines\Session;
 use WTSA1\Models\User;
-use WTSA1\Models\DiaryEntry;
+use WTSA1\Models\Entry;
 
-class DiaryEntryModelTest extends TestCase {
+class EntryModelTest extends TestCase {
 
     public function setUp(): void {
         Database::getInstance()->query("
@@ -33,7 +33,7 @@ class DiaryEntryModelTest extends TestCase {
       ");
 
       Session::getInstance()->setUser(User::login("someuser", "password"));
-      $entries = DiaryEntry::getEntriesForCurrentUser();
+      $entries = Entry::getEntriesForCurrentUser();
 
       $this->assertEquals($entries, array());
     }
@@ -51,12 +51,12 @@ class DiaryEntryModelTest extends TestCase {
       ");
 
       Session::getInstance()->setUser(User::login("someotheruser", "password"));
-      $entries = DiaryEntry::getEntriesForCurrentUser();
+      $entries = Entry::getEntriesForCurrentUser();
 
       $this->assertEquals(count($entries), 2);
     }
 
-    public function testForeignKeyViolationUserIdOnDiaryEntry() {
+    public function testForeignKeyViolationUserIdOnEntry() {
         $this->expectException(PDOException::class);
         Database::getInstance()->query("
           INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES
@@ -64,7 +64,7 @@ class DiaryEntryModelTest extends TestCase {
         ");
     }
     
-    public function testForeignKeyAcceptanceUserIdOnDiaryEntry() {
+    public function testForeignKeyAcceptanceUserIdOnEntry() {
         Database::getInstance()->query("
           INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES
             (1, 1, '2020-01-01', 'constraint');
@@ -72,7 +72,7 @@ class DiaryEntryModelTest extends TestCase {
         $this->assertNull(null);
     } 
     
-    public function testForeignKeyViolationCategoryIdOnDiaryEntry() {
+    public function testForeignKeyViolationCategoryIdOnEntry() {
         $this->expectException(PDOException::class);
         Database::getInstance()->query("
             INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES
@@ -80,7 +80,7 @@ class DiaryEntryModelTest extends TestCase {
         ");
     }
     
-    public function testForeignKeyAcceptanceCategoryIdOnDiaryEntry() {
+    public function testForeignKeyAcceptanceCategoryIdOnEntry() {
         Database::getInstance()->query("
             INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES
             (1, 1, '2020-01-01', 'constraint');

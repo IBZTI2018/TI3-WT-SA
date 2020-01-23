@@ -6,7 +6,7 @@ use WTSA1\Engines\Session;
 use WTSA1\Models\User;
 use WTSA1\Models\Category;
 
-class DiaryEntry {
+class Entry {
     private $_id;
     private $_user_id;
     private $_category_id;
@@ -61,7 +61,7 @@ class DiaryEntry {
 
     /**
      * List all diary entries for the current user
-     * @return array(DiaryEntry) List of diary entries
+     * @return array(Entry) List of diary entries
      */
     public static function getEntriesForCurrentUser() {
         if (Session::getInstance()->getUser() == null) return array();
@@ -74,7 +74,7 @@ class DiaryEntry {
 
         if (!is_array($result)) return array();
         return array_map(function($item) {
-            return DiaryEntry::parse(array($item));
+            return Entry::parse(array($item));
         }, $result);
     }
 
@@ -82,7 +82,7 @@ class DiaryEntry {
      * Get a diary entry object from the database by its id
      * 
      * @param int $id The id of the diary entry to search for
-     * @return DiaryEntry|null The diary entry object or null if not found
+     * @return Entry|null The diary entry object or null if not found
      */
     public static function getById($id)
     {
@@ -120,7 +120,7 @@ class DiaryEntry {
     private static function parse($result) {
         if (count($result) > 0) {
             $obj = $result[0];
-            $diary = new DiaryEntry($obj['id'], $obj['user_id'], $obj['category_id'], $obj['publish_date'], $obj['content']);
+            $diary = new Entry($obj['id'], $obj['user_id'], $obj['category_id'], $obj['publish_date'], $obj['content']);
             return $diary;
         }
         return null;
