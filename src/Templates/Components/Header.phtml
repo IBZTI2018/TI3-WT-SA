@@ -12,10 +12,10 @@
     <title>Tagebuch <?=ta($bindings, "title")?></title>
 </head>
 <body>
-    <div class="diary-wrapper">
+    <div class="diary-wrapper <?=ta($bindings, "bodyModifier")?>">
         <div class="diary-wrapper-inner">
             <div class="diary-wrapper-flex">
                 <div class="diary-container">
-                    <div class="diary-body <?=ta($bindings, "bodyModifier")?>">
+                    <div class="diary-body">
 
                       <!-- CONTENT START -->
