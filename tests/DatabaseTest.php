@@ -8,7 +8,7 @@ class DatabaseConstaintsTest extends TestCase {
   public function testUsernameUniqueConstraint() {
     $this->expectException(PDOException::class);
     Database::getInstance()->query("
-      INSERT INTO `user` (username, password) VALUES
+      INSERT INTO `users` (username, password) VALUES
         ('username', 'password'),
         ('username', 'password');
     ");
@@ -17,7 +17,7 @@ class DatabaseConstaintsTest extends TestCase {
   public function testCategoryUniqueConstraint() {
     $this->expectException(PDOException::class);
     Database::getInstance()->query("
-      INSERT INTO `category` (category) VALUES
+      INSERT INTO `categories` (category) VALUES
         ('samecategory'),
         ('samecategory');
     ");

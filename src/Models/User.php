@@ -45,7 +45,7 @@ class User {
      */
     public static function getById($id) {
         $result = Database::getInstance()->query("
-                SELECT * FROM `user` WHERE id = ?
+                SELECT * FROM `users` WHERE id = ?
             ",
             array($id)
         );
@@ -60,7 +60,7 @@ class User {
      */
     public static function getByName($username) {
         $result = Database::getInstance()->query("
-            SELECT * FROM `user` WHERE username = ?
+            SELECT * FROM `users` WHERE username = ?
         ", array($username));
 
         return self::parse($result);
@@ -75,7 +75,7 @@ class User {
      */
     public static function login($username, $password) {
         $result = Database::getInstance()->query("
-                SELECT * FROM `user` WHERE username = ?;
+                SELECT * FROM `users` WHERE username = ?;
             ", 
             array($username)
         );
@@ -109,7 +109,7 @@ class User {
 
         try {
             $result = Database::getInstance()->query("
-                INSERT INTO `user` (username, password) VALUES (?, ?)
+                INSERT INTO `users` (username, password) VALUES (?, ?)
             ", array($username, $hashedPassword));
         } catch (PDOException $e) {
             return null;

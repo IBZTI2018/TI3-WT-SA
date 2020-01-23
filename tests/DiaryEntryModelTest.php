@@ -13,22 +13,22 @@ class DiaryEntryModelTest extends TestCase {
 
     public function setUp(): void {
         Database::getInstance()->query("
-          INSERT INTO `user` (id, username, password) VALUES
+          INSERT INTO `users` (id, username, password) VALUES
             (1, 'someuser', '".PBKDF2::generate("password")."');
         ");
         Database::getInstance()->query("
-          INSERT INTO `category` (id, category) VALUES
+          INSERT INTO `categories` (id, category) VALUES
             (1, 'uncategorized');
         ");
     }
 
     public function testDoesNotListEntriesForOtherUser() {
       Database::getInstance()->query("
-        INSERT INTO `user` (id, username, password) VALUES
+        INSERT INTO `users` (id, username, password) VALUES
           (2, 'someotheruser', '".PBKDF2::generate("password")."');
       ");
       Database::getInstance()->query("
-        INSERT INTO `diary_entry` (user_id, category_id, publish_date, content) VALUES
+        INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES
           (2, 1, '2020-01-01', 'some content');
       ");
 
@@ -40,11 +40,11 @@ class DiaryEntryModelTest extends TestCase {
 
     public function testDoesListAllEntriesForCurrentUser() {
       Database::getInstance()->query("
-        INSERT INTO `user` (id, username, password) VALUES
+        INSERT INTO `users` (id, username, password) VALUES
           (2, 'someotheruser', '".PBKDF2::generate("password")."');
       ");
       Database::getInstance()->query("
-        INSERT INTO `diary_entry` (user_id, category_id, publish_date, content) VALUES
+        INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES
           (2, 1, '2020-01-01', 'some content'),
           (2, 1, '2020-01-01', 'some content'),
           (1, 1, '2020-01-01', 'some other content');
@@ -59,14 +59,14 @@ class DiaryEntryModelTest extends TestCase {
     public function testForeignKeyViolationUserIdOnDiaryEntry() {
         $this->expectException(PDOException::class);
         Database::getInstance()->query("
-          INSERT INTO `diary_entry` (user_id, category_id, publish_date, content) VALUES
+          INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES
             (9999999, 1, '2020-01-01', 'constraint');
         ");
     }
     
     public function testForeignKeyAcceptanceUserIdOnDiaryEntry() {
         Database::getInstance()->query("
-          INSERT INTO `diary_entry` (user_id, category_id, publish_date, content) VALUES
+          INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES
             (1, 1, '2020-01-01', 'constraint');
         ");
         $this->assertNull(null);
@@ -75,14 +75,14 @@ class DiaryEntryModelTest extends TestCase {
     public function testForeignKeyViolationCategoryIdOnDiaryEntry() {
         $this->expectException(PDOException::class);
         Database::getInstance()->query("
-            INSERT INTO `diary_entry` (user_id, category_id, publish_date, content) VALUES
+            INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES
             (1, 9999999, '2020-01-01', 'constraint');
         ");
     }
     
     public function testForeignKeyAcceptanceCategoryIdOnDiaryEntry() {
         Database::getInstance()->query("
-            INSERT INTO `diary_entry` (user_id, category_id, publish_date, content) VALUES
+            INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES
             (1, 1, '2020-01-01', 'constraint');
         ");
         $this->assertNull(null);

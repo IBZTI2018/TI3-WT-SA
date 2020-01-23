@@ -31,7 +31,7 @@ class PageCreateTest extends TestCase {
             array(5, "Ausflug")
         );
         Database::getInstance()->query("
-            INSERT INTO `category` (id, category) VALUES
+            INSERT INTO `categories` (id, category) VALUES
             ". implode(", ", array_map(function($item) { return "('".$item[0]."','".$item[1]."')"; }, $dummyData)) . "
             ;
         ");

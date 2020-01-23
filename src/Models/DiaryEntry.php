@@ -68,7 +68,7 @@ class DiaryEntry {
 
         $user_id = Session::getInstance()->getUser()->getId();
         $result = Database::getInstance()->query("
-            SELECT * FROM `diary_entry` WHERE user_id = ?
+            SELECT * FROM `entries` WHERE user_id = ?
             ORDER BY `publish_date` DESC;
         ",array($user_id));
 
@@ -87,7 +87,7 @@ class DiaryEntry {
     public static function getById($id)
     {
         $result = Database::getInstance()->query("
-                SELECT * FROM `diary_entry` WHERE id = ?
+                SELECT * FROM `entries` WHERE id = ?
             ",
             array($id)
         );
@@ -107,7 +107,7 @@ class DiaryEntry {
     {
         try {
             $result = Database::getInstance()->query("
-                    INSERT INTO diary_entry (user_id, category_id, publish_date, content) VALUES (?, ?, ?, ?)
+                    INSERT INTO entries (user_id, category_id, publish_date, content) VALUES (?, ?, ?, ?)
                 ",
                 array($user_id, $category_id, $publish_date, $content)
             );

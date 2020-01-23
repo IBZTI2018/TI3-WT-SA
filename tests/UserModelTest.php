@@ -16,7 +16,7 @@ class UserModelTest extends TestCase {
 
     public function testReturnsUserIfFoundById() {
         Database::getInstance()->query("
-          INSERT INTO `user` (id, username, password)
+          INSERT INTO `users` (id, username, password)
           VALUES (1, 'someuser', '".PBKDF2::generate("password")."');
         ");
 
@@ -32,7 +32,7 @@ class UserModelTest extends TestCase {
 
     public function testReturnsUserIfFoundByname() {
         Database::getInstance()->query("
-          INSERT INTO `user` (id, username, password)
+          INSERT INTO `users` (id, username, password)
           VALUES (1, 'someuser', '".PBKDF2::generate("password")."');
         ");
 

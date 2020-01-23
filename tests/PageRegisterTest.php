@@ -50,7 +50,7 @@ class PageRegisterTest extends TestCase {
 
     public function testCreatesErrorWhenUsernameAlreadyTaken() {
         Database::getInstance()->query("
-            INSERT INTO `user` (id, username, password)
+            INSERT INTO `users` (id, username, password)
             VALUES (1, 'someuser', '".PBKDF2::generate("password")."');
         ");
 
