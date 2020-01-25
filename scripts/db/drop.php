@@ -14,33 +14,33 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 function databaseDrop() {
 
-  echo "Dropping foreign key relationship between diary_entry.user_id and user.id...\r\n";
+  echo "Dropping foreign key relationship between entries.user_id and user.id...\r\n";
   try {
     Database::getInstance()->query("
-    ALTER TABLE `diary_entry` DROP FOREIGN KEY `fk_diary_entry.user_id__user.id`
+    ALTER TABLE `entries` DROP FOREIGN KEY `fk_entries.user_id__user.id`
   ");
   } catch (PDOException $e) {}
 
-  echo "Dropping foreign key relationship between diary_entry.category_id and category.id...\r\n";
+  echo "Dropping foreign key relationship between entries.category_id and category.id...\r\n";
   try {
     Database::getInstance()->query("
-      ALTER TABLE `diary_entry` DROP FOREIGN KEY `fk_diary_entry.category_id__category.id`
+      ALTER TABLE `entries` DROP FOREIGN KEY `fk_entries.category_id__category.id`
     ");
   } catch (PDOException $e) {}
   
-  echo "Dropping `user`...\r\n";
+  echo "Dropping `users`...\r\n";
   Database::getInstance()->query("
-    DROP TABLE IF EXISTS `user`
+    DROP TABLE IF EXISTS `users`
   ");
 
-  echo "Dropping `category`...\r\n";
+  echo "Dropping `categories`...\r\n";
   Database::getInstance()->query("
-    DROP TABLE IF EXISTS `category`
+    DROP TABLE IF EXISTS `categories`
   ");
 
-  echo "Dropping `diary_entry`...\r\n";
+  echo "Dropping `entries`...\r\n";
   Database::getInstance()->query("
-    DROP TABLE IF EXISTS `diary_entry`
+    DROP TABLE IF EXISTS `entries`
   ");
 
   echo "Done!\r\n";

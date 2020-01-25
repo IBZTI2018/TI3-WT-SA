@@ -37,7 +37,7 @@ class Category {
      */
     public static function getById($id) {
         $result = Database::getInstance()->query("
-                SELECT * FROM `category` WHERE id = ?
+                SELECT * FROM `categories` WHERE id = ?
             ",
             array($id)
         );
@@ -51,7 +51,7 @@ class Category {
      */
     public static function getAll() {
         $results = Database::getInstance()->query("
-                SELECT * FROM `category` ORDER BY id
+                SELECT * FROM `categories` ORDER BY id
             "
         );
         return array_map(function($obj) {

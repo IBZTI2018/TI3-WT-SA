@@ -362,21 +362,27 @@ body {
 .diary-entries h4 ,
 .diary-entries p {
     line-height: 27px;
+    clear: right;
+    margin-bottom: 54px;
+}
+
+.diary-entries p img {
+    margin-left: 10px;
+    max-width: 30%;
+    float: right;
+    transform: rotate(5deg);
+    border: 2px solid brown;
 }
 
 .diary-entries h4 {
     margin-bottom: 0;
 }
 
-.diary-entries p {
-    margin: 0;
-}
-
 .diary-category {
     font-weight: normal;
     display: inline-block;
     padding-left: 20px;
-    color: #777;
+    color: #666;
 }
 
 .error {

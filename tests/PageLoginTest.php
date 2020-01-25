@@ -49,7 +49,7 @@ class PageLoginTest extends TestCase {
 
     public function testLogsInWithValidCredentials() {
         Database::getInstance()->query("
-            INSERT INTO `user` (id, username, password)
+            INSERT INTO `users` (id, username, password)
             VALUES (1, 'someuser', '".PBKDF2::generate("password")."');
         ");
 
