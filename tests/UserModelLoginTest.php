@@ -16,7 +16,7 @@ class UserModelLoginTest extends TestCase {
 
     public function testLoginFailsWithWrongUsername() {
         Database::getInstance()->query("
-            INSERT INTO `user` (username, password)
+            INSERT INTO `users` (username, password)
                 VALUES ('someuser', '".PBKDF2::generate('password')."');
         ");
 
@@ -26,7 +26,7 @@ class UserModelLoginTest extends TestCase {
 
     public function testLoginFailsWithWrongPassword() {
         Database::getInstance()->query("
-            INSERT INTO `user` (username, password)
+            INSERT INTO `users` (username, password)
                 VALUES ('someuser', '".PBKDF2::generate('password')."');
         ");
 
@@ -36,7 +36,7 @@ class UserModelLoginTest extends TestCase {
 
     public function testLoginWorksWithCorrectCredentials() {
         Database::getInstance()->query("
-            INSERT INTO `user` (username, password)
+            INSERT INTO `users` (username, password)
                 VALUES ('someuser', '".PBKDF2::generate('password')."');
         ");
 

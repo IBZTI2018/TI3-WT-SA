@@ -19,7 +19,7 @@ use WTSA1\Models\Category;
         <pre class="error"><?= $this->data['error']; ?></pre>
     <?php } ?>
 
-    <form action="/create" method="POST">
+    <form action="/create" method="POST" enctype="multipart/form-data">
         <label for="publish_date">Veröffentlichungsdatum:</label>
         <input type="date" name="publish_date" value="<?= date('Y-m-d') ?>">
         <br>
@@ -32,6 +32,8 @@ use WTSA1\Models\Category;
         <br>
         <label for="content">Inhalt:</label>
         <textarea name="content" cols="60" rows="20" maxlength="1000"></textarea>
+        <br>
+        <input type="file" name="image" accept="image/png,image/jpeg">
         <br>
         <input type="submit" value="Erstellen">
     </form>
