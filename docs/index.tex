@@ -1,9 +1,13 @@
 \documentclass{article}
 
+\usepackage[a4paper, total={6in, 10in}, includeheadfoot]{geometry}
 \usepackage[german]{babel}
 \usepackage{pgfplots}
 \usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{longtable}
 
+\graphicspath{ {./assets/} }
 \pgfplotsset{compat=1.16}
 \urlstyle{same}
 \hypersetup{
@@ -16,7 +20,7 @@
 \begin{document}
 \selectlanguage{german}
 
-\title{TI3 Web-Technologie: Case-Study 1}
+\title{\vspace{-2cm}TI3 Web-Technologie: Case-Study 1}
 \author{Sven Gehring, André Glatzl}
 \date{}
 \maketitle
@@ -26,12 +30,10 @@
 \end{abstract}
 
 % TODO: Remove this for final version!
-\vspace{3cm}
 \begin{center}
   \textcolor{red}{\textbf{\emph{!Unvollständige Fassung für Zwischentermine!}}}
 \end{center}
 
-\clearpage
 \tableofcontents
 
 % Imported document contents
@@ -50,15 +52,13 @@
 \input{contents/organization/timetable.tex}
 
 \clearpage
-\section{Installation}
-\input{contents/installation/dbinit.tex}
+\section{Technische Dokumentation}
+\input{contents/technical/architecture.tex}
+\input{contents/technical/database.tex}
 
 \clearpage
 \section{Anhänge}
-\subsection{Externe Verweise}
-\begin{itemize}
-  \item Öffentliche Repository: \href{https://github.com/ibzti2018/ti3-wt-sa}{github.com/ibzti2018/ti3-wt-sa}
-  \item Ausgelieferte Version: \href{https://ibz-wtsa1.dev.cybrox.eu/}{ibz-wtsa1.dev.cybrox.eu}
-\end{itemize}
+\input{contents/addendum/personal.tex}
+\input{contents/addendum/references.tex}
 
 \end{document}

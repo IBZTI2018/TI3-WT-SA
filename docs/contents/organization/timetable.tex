@@ -1,16 +1,32 @@
 \subsection{Zeitabrechnung}
 Das Aufsetzen und schreiben der ersten Absätze der Dokumentation wurde vorab nicht geschätzt. Es wurde stattdessen im Rahmen einer kleinen Machbarkeits-Studie durchgeführt, um zu evaluieren, ob unser selbst gestecktes Ziel - das Schreiben der Dokumentation in \LaTeX - realistisch sei.
 
-Nachfolgend werden sämtliche Tätigkeiten des Projekts mitsamt geplanter (\emph{P}) und effektiver (\emph{E}) Zeit aufgelistet. Für den Entwicklungsverlauf wird statt einer Beschreibung die User-Story ID im Format \emph{\#id} angegeben. Die entsprechenden User-Storys finden sich im vorherigen Abschnitt.
+Nachfolgend werden sämtliche Tätigkeiten des Projekts mitsamt geplanter, effektiver und Delta-Zeit im Format \emph{h:mm} aufgelistet. Für den Entwicklungsverlauf wird statt einer Beschreibung die User-Story ID im Format \emph{\#id} angegeben. Die entsprechenden User-Storys finden sich im vorherigen Abschnitt.
 
 \vspace{5mm}
 
-\begin{tabular}{ c c l l }
-  \textbf{P} & \textbf{E} & \textbf{Arbeiter} & \textbf{Aufgabe} \\
-  - & 2h & Sven & LaTeX Dokumentation Einrichten \\
-  - & 2h & Beide & Dokumentation Organisationsform, Technik, VC\\
-  1h & 40m & Beide & Stakeholder-Analyse, Milestone-Definition (Webmeeting) \\
-  2h & 1h & Sven & Docker, docker-compose, PHPUnit setup \\
-  - & 30m & Sven & Dokumentations-Abgabe Zwischentermin \\ 
-  30m & 40m & Beide & Grooming Sprint 1 (Webmeeting) \\
-\end{tabular}
+\begin{longtable}{ c c c l l }
+  \textbf{Plan} & \textbf{Eff.} & \textbf{Delta} & \textbf{Teiln.} & \textbf{Aufgabe} \\
+  - & 2:00 & +2:00 & Sven & LaTeX Dokumentation Einrichten \\
+  - & 2:00 & +2:00 & Beide & Dokumentation Organisationsform, Technik, VC\\
+  1:00 & 0:40 & -0:20 & Beide & Stakeholder-Analyse, Milestone-Definition (Webmeeting) \\
+  2:00 & 3:00 & +1:00 & Sven & Docker, docker-compose, PHPUnit setup \\
+  - & 0:30 & +0:30 & Sven & Dokumentations-Abgabe Zwischentermin \\ 
+  0:30 & 0:40 & +0:10 & Beide & Grooming Sprint 1 (Webmeeting) \\
+  3:00 & 6:00 & +3:00 & André & \#2 Nutzerdaten in der Datenbank speichern \\
+  3:00 & 3:00 & +0:00 & André & \#3 Anmelden mit Benutzerdaten \\
+  2:00 & 3:00 & +1:00 & Sven & \#4 Registrieren mit Benutzerdaten \\
+  1:00 & 1:30 & +0:30 & André & \#5 Passwörter mit pbkdf2 hashen \\
+  5:00 & 3:30 & -1:30 & Beide & Code-Review vor Merging \\
+  0:30 & 1:00 & +0:30 & Beide & Grooming Sprint 2 (Webmeeting) \\
+  1:00 & 2:00 & +1:00 & Sven & \#10 Datenbank-Hook für Deployment \\
+  3:00 & 3:00 & +0:00 & André & \#11 Neuen Tagebucheintrag erfassen \\
+  2:00 & 1:30 & -0:30 & André & \#12 Kategorien erstellen \\
+  1:00 & 0:30 & -0:30 & Sven & \#13 Ausloggen unterstützen \\
+  2:00 & 4:00 & +2:00 & Sven & \#14 Grundlegendes Design \\
+  3:00 & 1:30 & -1:30 & Sven & \#15 Einträge anzeigen \\
+  5:00 & 2:30 & -2:30 & Beide & Code-Review vor Merging \\
+  4:00 & 4:30 & +0:30 & Sven & Dokumentation bereinigen \\
+  %\hline
+  %29:00 & 36:20 & +7:20 & & von 2*60h gesamt. \\
+\end{longtable}
