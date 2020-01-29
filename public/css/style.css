@@ -388,3 +388,25 @@ body {
     color: #DC143C;
     min-height: 20px;
 }
+
+/*
+ * Call to action buttons
+ */
+.diary-auth a.call-to-action,
+.call-to-action {
+    background-color: #800000;
+    box-shadow: 3px 3px 0px #570303;
+    border-radius: 30px;
+    padding: 0 30px;
+    color: white;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.diary-auth a.call-to-action:hover,
+.call-to-action:hover {
+    background-color: #570303;
+    box-shadow: 3px 3px 0px #800000;
+    border-radius: 30px;
+    padding: 0 30px;
+    color: white;
+}
