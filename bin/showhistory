@@ -1,0 +1,50 @@
+#!/bin/bash
+#
+# Show project history with gource
+# You must press ESC to stop the gource recording when desired.
+# The re-encoding process will happen automatically afterwards.
+
+if [[ $(which gource 2> /dev/null) == "" ]]; then
+  echo "gource is not installed!"
+  exit 1
+fi
+
+if [[ $(which ffmpeg 2> /dev/null) == "" ]]; then
+  echo "ffmpeg is not installed!"
+  exit 1
+fi
+
+gource \
+  --hide usernames,mouse \
+  --seconds-per-day 0.2 \
+  --file-idle-time 0 \
+  --auto-skip-seconds 1 \
+  --title "WebTech CaseStudy" \
+  -1280x720 -o - | \
+    ffmpeg -y -r 60 \
+      -f image2pipe -vcodec ppm -i - -vcodec libx264 \
+      -preset ultrafast \
+      -pix_fmt yuv420p \
+      -crf 1 \
+      -threads 0 \
+      -bf 0 \
+      history_raw.mp4
+
+if [ ! -f "./history_raw.mp4" ]; then
+  echo "failed to generate gource video"
+  exit 1
+fi
+
+ffmpeg \
+  -i history_raw.mp4 \
+  -vcodec libx264 \
+  -crf 24 history.mp4
+
+if [ ! -f "./history.mp4" ]; then
+  echo "failed to compress gource video"
+  exit 1
+fi
+
+rm "./history_raw.mp4"
+echo "Generated history video"
+ls -lah | grep "history.mp4"
