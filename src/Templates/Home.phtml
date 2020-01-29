@@ -1,3 +1,7 @@
+<?php 
+use WTSA1\Models\Category;
+?>
+
 <div class="diary-logged-in">
     <div class="diary-username">
         <h2><?=t($this->data["user"]->getUsername())?>'s Tagebuch</h2>
@@ -14,6 +18,28 @@
     </div>
     
     <div class="diary-entries">
+        <form action="" method="GET">
+            <h5>Filtern nach:</h5>
+            <label>Kategorie: </label>
+            <select name="filter_by_category_id">
+                <?php foreach (Category::getAll() as $category) { 
+                    $selected = isset($_REQUEST['filter_by_category_id']) && intval($_REQUEST['filter_by_category_id']) == $category->getId();
+                ?>
+                    <option value="<?= $category->getId() ?>" <?= $selected ? 'selected' : '' ?>><?= $category->getCategory() ?></option>
+                <?php } ?>    
+            </select>
+            <br>
+            <label>Datumsbereich: </label>
+            <input type="date" name="filter_by_from_date" value="<?= isset($_REQUEST['filter_by_from_date']) ? $_REQUEST['filter_by_from_date'] : '' ?>">
+            <input type="date" name="filter_by_until_date" value="<?= isset($_REQUEST['filter_by_until_date']) ? $_REQUEST['filter_by_until_date'] : '' ?>">
+            <input type="submit" value="Filter">
+        </form>
+        <?php if (isset($_REQUEST['filter_by_from_date']) || isset($_REQUEST['filter_by_until_date'])) { ?>
+            <form class="deactivate-filter" action="" method="GET">
+                <input type="submit" value="Filter deaktivieren">
+            </form>
+        <?php } ?>
+
         <?php if (count($this->data['entries']) == 0) {?>
             <p class="diary-empty">Deinem Tagebuch mangelt es an Abenteuern :/</p>    
         <?php } ?>
