@@ -28,6 +28,9 @@
                     <div class="diary-bottomcloser"></div>
                 </div>
                 <div class="diary-bottom-spacer"></div>
+                <?php if (isset($GLOBALS['_VERSION_']) && strlen($GLOBALS['_VERSION_']) > 0) { ?>
+                    <div class="git-version"><?= $GLOBALS['_VERSION_'] ?></div>
+                <?php } ?>
             </div>
         </div>
     </div>
