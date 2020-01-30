@@ -19,5 +19,6 @@ vendor/
 # Ignore all environment files
 *.env
 
-# Ignore generated history video
+# Ignore VERSION.txt
+VERSION.txt
 history.mp4
