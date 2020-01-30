@@ -92,12 +92,12 @@ class Entry {
             /*
              * Validate data of filters
              */ 
-            if (isset($filter_by['category_id'])) {
+            if (!empty($filter_by['category_id'])) {
                 if (is_int($filter_by['category_id']) == false || $filter_by['category_id'] < 1) {
                     unset($filter_by['category_id']);
                 } 
             }
-            if (isset($filter_by['publish_date'])) {
+            if (!empty($filter_by['publish_date'])) {
                 if (is_array($filter_by['publish_date']) == false) {
                     unset($filter_by['publish_date']);
                 } else {
@@ -111,9 +111,16 @@ class Entry {
                         } 
                     }
                     if (!$publish_date_disabled) {
-                        $from_date = $filter_by['publish_date'][0];
-                        $until_date = $filter_by['publish_date'][1];
-                        $filter_by['publish_date'] = "(publish_date >= '$from_date' AND publish_date <= '$until_date')";
+                        $publish_date_group = array();
+                        if (!empty($filter_by['publish_date'][0])) {
+                            $from_date = $filter_by['publish_date'][0];
+                            $publish_date_group[] = "publish_date >= '$from_date'";
+                        }
+                        if (!empty($filter_by['publish_date'][1])) {
+                            $until_date = $filter_by['publish_date'][1];
+                            $publish_date_group[] = "publish_date <= '$until_date'";
+                        }
+                        $filter_by['publish_date'] = "(" . implode(" AND ", $publish_date_group) . ")";
                     }
                 }
             }

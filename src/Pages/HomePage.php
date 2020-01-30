@@ -10,17 +10,18 @@ class HomePage extends Page {
 
     protected function get() {
         $filter_by = array();
-        if (isset($_REQUEST['filter_by_category_id']) && empty($_REQUEST['filter_by_category_id']) == false) {
+        if (!empty($_REQUEST['filter_by_category_id'])) {
             $filter_by['category_id'] = intval($_REQUEST['filter_by_category_id']);
         }
-        if (isset($_REQUEST['filter_by_from_date']) && empty($_REQUEST['filter_by_from_date']) == false) {
+        
+        if (!empty($_REQUEST['filter_by_from_date'])) {
             if (isset($filter_by['publish_date']) == false) {
                 $filter_by['publish_date'] = array();    
             }
             $filter_by['publish_date'][0] = $_REQUEST['filter_by_from_date'];
         }
 
-        if (isset($_REQUEST['filter_by_until_date']) && empty($_REQUEST['filter_by_until_date']) == false) {
+        if (!empty($_REQUEST['filter_by_until_date'])) {
             if (isset($filter_by['publish_date']) == false) {
                 $filter_by['publish_date'] = array();    
             }
