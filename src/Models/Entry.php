@@ -74,16 +74,76 @@ class Entry {
 
     /**
      * List all diary entries for the current user
+     * @param array List of fields to be filtered by
      * @return array(Entry) List of diary entries
      */
-    public static function getEntriesForCurrentUser() {
+    public static function getEntriesForCurrentUser($filter_by = array()) {
         if (Session::getInstance()->getUser() == null) return array();
 
+        $filter_by_condition = "";
+        if (count($filter_by) > 0) {
+            /*
+             * Only allow certain fields to be filtered
+             */ 
+            $filter_by = array_filter($filter_by, function($key) {
+                return $key == 'category_id' || $key == 'publish_date';
+            }, ARRAY_FILTER_USE_KEY);
+
+            /*
+             * Validate data of filters
+             */ 
+            if (!empty($filter_by['category_id'])) {
+                if (is_int($filter_by['category_id']) == false || $filter_by['category_id'] < 1) {
+                    unset($filter_by['category_id']);
+                } 
+            }
+            if (!empty($filter_by['publish_date'])) {
+                if (is_array($filter_by['publish_date']) == false) {
+                    unset($filter_by['publish_date']);
+                } else {
+                    $publish_date_disabled = false;
+                    foreach ($filter_by['publish_date'] as $date) {
+                        $date_regex = "/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/";
+                        if (preg_match($date_regex, $date) == false || empty($date)) {
+                            unset($filter_by['publish_date']);
+                            $publish_date_disabled = true;
+                            break;
+                        } 
+                    }
+                    if (!$publish_date_disabled) {
+                        $publish_date_group = array();
+                        if (!empty($filter_by['publish_date'][0])) {
+                            $from_date = $filter_by['publish_date'][0];
+                            $publish_date_group[] = "publish_date >= '$from_date'";
+                        }
+                        if (!empty($filter_by['publish_date'][1])) {
+                            $until_date = $filter_by['publish_date'][1];
+                            $publish_date_group[] = "publish_date <= '$until_date'";
+                        }
+                        $filter_by['publish_date'] = "(" . implode(" AND ", $publish_date_group) . ")";
+                    }
+                }
+            }
+
+            /*
+             * Build filter by string
+             */ 
+            foreach ($filter_by as $key => $value) {
+                if ($key == 'publish_date') {
+                    $filter_by_condition .= "AND $value ";
+                } else if ($key == 'category_id') {
+                    $filter_by_condition .= "AND $key = $value ";
+                }
+            }
+        }
+
         $user_id = Session::getInstance()->getUser()->getId();
-        $result = Database::getInstance()->query("
+        $query = "
             SELECT * FROM `entries` WHERE user_id = ?
+            $filter_by_condition
             ORDER BY `publish_date` DESC;
-        ",array($user_id));
+        ";
+        $result = Database::getInstance()->query($query, array($user_id));
 
         if (!is_array($result)) return array();
         return array_map(function($item) {

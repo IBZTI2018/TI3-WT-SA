@@ -100,5 +100,115 @@ class EntryModelTest extends TestCase {
 
       $this->assertEquals($formatted, "data:image/png;base64,".base64_encode($imageBlob));
     }
+
+    public function testGetEntriesFilterByDate() {
+      Database::getInstance()->query("
+        INSERT INTO `users` (id, username, password) VALUES
+          (2, 'someotheruser', '".PBKDF2::generate("password")."');
+      ");
+      Database::getInstance()->query("
+        INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES
+          (2, 1, '2020-01-01', 'some content'),
+          (2, 1, '2019-01-01', 'some content'),
+          (2, 1, '2018-01-01', 'some other content');
+      ");
+
+      Session::getInstance()->setUser(User::login("someotheruser", "password"));
+      $entries = Entry::getEntriesForCurrentUser(array(
+          'publish_date' => array(
+            '2017-12-31',
+            '2019-01-02'
+          )
+        )
+      );
+
+      $this->assertEquals(count($entries), 2);
+    }
+
+    public function testGetEntriesFilterByCategory() {
+      Database::getInstance()->query("
+        INSERT INTO `categories` (id, category) VALUES
+          (2, 'test2'),
+          (3, 'test3');
+      ");
+      Database::getInstance()->query("
+        INSERT INTO `users` (id, username, password) VALUES
+          (2, 'someotheruser', '".PBKDF2::generate("password")."');
+      ");
+      Database::getInstance()->query("
+        INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES
+          (2, 1, '2020-01-01', 'some content'),
+          (2, 2, '2019-01-01', 'some content'),
+          (2, 3, '2018-01-01', 'some other content');
+      ");
+
+      Session::getInstance()->setUser(User::login("someotheruser", "password"));
+      $entries = Entry::getEntriesForCurrentUser(array(
+          'category_id' => 3
+        )
+      );
+
+      $this->assertEquals(count($entries), 1);
+    }
+
+    public function testGetEntriesFilterByCategoryAndPublishDate() {
+      Database::getInstance()->query("
+        INSERT INTO `categories` (id, category) VALUES
+          (2, 'test2'),
+          (3, 'test3');
+      ");
+      Database::getInstance()->query("
+        INSERT INTO `users` (id, username, password) VALUES
+          (2, 'someotheruser', '".PBKDF2::generate("password")."');
+      ");
+      Database::getInstance()->query("
+        INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES
+          (2, 1, '2020-01-01', 'some content'),
+          (2, 2, '2019-01-01', 'some content'),
+          (2, 3, '2018-01-01', 'some other content');
+      ");
+
+      Session::getInstance()->setUser(User::login("someotheruser", "password"));
+      $entries = Entry::getEntriesForCurrentUser(array(
+          'publish_date' => array(
+            '2017-12-31',
+            '2019-01-02'
+          ),
+          'category_id' => 1
+        )
+      );
+
+      $this->assertEquals(count($entries), 0);
+    }
+
+    public function testGetEntriesFilterByWrongFilters() {
+      Database::getInstance()->query("
+        INSERT INTO `categories` (id, category) VALUES
+          (2, 'test2'),
+          (3, 'test3');
+      ");
+      Database::getInstance()->query("
+        INSERT INTO `users` (id, username, password) VALUES
+          (2, 'someotheruser', '".PBKDF2::generate("password")."');
+      ");
+      Database::getInstance()->query("
+        INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES
+          (2, 1, '2020-01-01', 'some content'),
+          (2, 2, '2019-01-01', 'some content'),
+          (2, 3, '2018-01-01', 'some other content');
+      ");
+
+      Session::getInstance()->setUser(User::login("someotheruser", "password"));
+      $entries = Entry::getEntriesForCurrentUser(array(
+          'publish_date' => array(
+            '2017-12',
+            '13. Januar 2008'
+          ),
+          'category_id' => 'Ausflug'
+        )
+      );
+
+      $this->assertEquals(count($entries), 3);
+    }
 }
 ?>
