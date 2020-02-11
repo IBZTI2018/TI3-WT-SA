@@ -33,7 +33,6 @@ body {
     background-image: url('/public/assets/wood.png');
     background-repeat: repeat;
     background-color: #C3D0AB;
-    font-family: 'Caveat', cursive;
     overflow: hidden;
 }
 
@@ -66,7 +65,8 @@ body {
 .diary-body {
     max-width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: scroll;
     position: relative;
 }
 
@@ -317,6 +317,7 @@ body {
     padding: 0;
     font-size: 1.8em;
     color: #A52A2A;
+    font-family: 'Caveat', cursive;
 }
 
 .diary-logout {
@@ -325,31 +326,29 @@ body {
 }
 
 .diary-logout input {
-    margin: 0;
-    padding: 10px;
-    background: none !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    font-size: 1.3em;
-    color: #A52A2A;
+    border: none;
 }
 
-.diary-logout input:hover,
-.diary-logout input:focus {
-    display: inline-block;
+.diary-logout input:hover {
     cursor: pointer;
-    border-left: 1px dotted #A52A2A !important;
-    border-radius: 50%;
 }
 
 /**
  * Home page
  */
+.entry-list,
+.entry-list * {
+    font-family: 'Caveat', cursive;
+    font-size: 1.12em;
+}
+
 .diary-empty {
-    margin: 17px 0 0 0 !important;
+    margin: 30px 0 0 0 !important;
     padding: 0;
     text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 1.4em;
+    color: #873600;
 }
 
 .diary-create {
@@ -358,20 +357,11 @@ body {
     padding: 0 20px;
     box-sizing: border-box;
     text-align: right;
+    margin-top: -34px;
 }
 
 .diary-create a {
-    display: inline-block;
-    padding: 5px 10px;
-    font-size: 1.3em;
-    color: #A52A2A;
     text-decoration: none;
-}
-
-.diary-create a:hover {
-    cursor: pointer;
-    border-left: 1px dotted #A52A2A !important;
-    border-radius: 50%;
 }
 
 .diary-entries {
@@ -389,23 +379,55 @@ body {
     margin-left: 10px;
     max-width: 30%;
     float: right;
-    transform: rotate(5deg);
+    transform: rotate(2deg);
+    transition: transform 0.3s ease-in-out;
     border: 2px solid brown;
+}
+
+.diary-entries p img:hover {
+    transform: rotate(-5deg) scale(1.1);
+    cursor: pointer;
 }
 
 .diary-entries h4 {
     margin-bottom: 0;
 }
 
-.diary-entries form:not(.deactivate-filter) {
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 10px;
+.diary-filter .filter-row {
+    width: 100%;
+    display: flex;
+    padding-bottom: 5px;
 }
 
-.diary-entries .deactivate-filter {
-    width: 100%;
-    background-color: orange;
-    color: black;
+.diary-filter .filter-col {
+    flex-direction: row;
+    width: 40%;
+}
+
+.diary-filter .filter-col:last-of-type {
+    width: 60%;
+    text-align: right;
+}
+
+.diary-filter {
+    margin-top: 20px;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-top: 2px dotted #D19F72;
+    border-bottom: 2px dotted #D19F72;
+}
+
+.deactivate-filter {
+    text-align: right;
+}
+
+.deactivate-filter input {
+    border: none;
+}
+
+.deactivate-filter input:hover {
+    cursor: pointer;
 }
 
 .diary-category {
@@ -421,6 +443,13 @@ body {
     color: #F2D7D5;
     min-height: 20px;
     font-family: 'Caveat', cursive;
+    text-align: center;
+}
+
+.error.dark {
+    margin-top: 0;
+    padding-top: 0;
+    color: red;
 }
 
 /*
@@ -442,6 +471,77 @@ body {
     background-color: #800000;
     box-shadow: inset 2px 2px 0px #570303;
 }
+
+input.call-to-action {
+    border: none;
+}
+
+a.call-to-action {
+    text-decoration: none;
+}
+
+input.call-to-action:hover {
+    cursor: pointer;
+}
+
+.create-title {
+    margin: 0;
+    padding: 20px 0 0 20px;
+    font-family: 'Caveat', cursive;
+    color: #A52A2A;
+}
+
+.create-back {
+    text-align: right;
+    padding-right: 20px;
+    margin-bottom: 20px;
+    margin-top: -30px;
+}
+
+.create-form {
+    padding: 20px;
+}
+
+.create-row {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.create-col {
+    flex-direction: row;
+    width: 30%;
+}
+
+.create-col:last-of-type {
+    width: 70%;
+}
+
+.create-col input,
+.create-col select {
+    width: 100%;
+}
+
+.create-col textarea {
+    width: 100%;
+    min-height: 200px;
+    resize: vertical;
+    background: none;
+    font-family: 'Caveat', cursive;
+    font-size: 1.26em;
+    border: 1px dotted #B7950B;
+    transition: border 0.2s ease-in-out;
+    outline: none;
+    box-shadow: none;
+}
+
+.create-col textarea:hover,
+.create-col textarea:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #B7950B;
+}
+
 
 /* Special open cover on desktop */
 .diary-open-cover {
