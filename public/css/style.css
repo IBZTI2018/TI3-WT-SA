@@ -465,16 +465,19 @@ body {
         margin-left: -96%;
         margin-left: calc( -100% + 16px );
         transform: rotateY(180deg);
+    }
+
+    .diary-open-cover.animate {
         animation-name: openbook;
         animation-duration: 2s;
     }
 
-    .diary-open .diary-container .diary-open-cover::after {
+    .diary-open .diary-open-cover::after {
         content: ' ';
         clear: both;
     }
 
-    .diary-open .diary-open-cover .diary-open-cover-side {
+    .diary-open .diary-open-cover-side {
         display: block;
         width: 50%;
         height: 100%;

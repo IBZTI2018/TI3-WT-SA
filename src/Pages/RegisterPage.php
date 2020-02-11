@@ -11,7 +11,7 @@ class RegisterPage extends Page {
 
     protected function post() {
         if (empty($_REQUEST['username'])) {
-            $this->data['error'] = "Bitte gib ein Username ein!";
+            $this->data['error'] = "Bitte gib einen Benutzernamen ein!";
             return;
         }
 

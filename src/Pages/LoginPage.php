@@ -29,7 +29,7 @@ class LoginPage extends Page {
         Session::getInstance()->setUser($user);
 
         // Login successful
-        header("Location: /");
+        header("Location: /?aob=yes");
     }
 }
 

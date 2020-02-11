@@ -25,7 +25,7 @@ class PageRegisterTest extends TestCase {
         $testee = new PageRegisterTestee();
         $_REQUEST = array();
         $testee->testPost();
-        $this->assertEquals($testee->dumpData()["error"], "Bitte gib ein Username ein!");
+        $this->assertEquals($testee->dumpData()["error"], "Bitte gib einen Benutzernamen ein!");
     }
 
     public function testCreatesErrorWhenPasswordEmpty() {
