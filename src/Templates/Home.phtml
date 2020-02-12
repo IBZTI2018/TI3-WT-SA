@@ -4,40 +4,58 @@ use WTSA1\Models\Category;
 
 <div class="diary-logged-in">
     <div class="diary-username">
-        <h2><?=t($this->data["user"]->getUsername())?>'s Tagebuch</h2>
+        <h2><?=t($this->data["user"]->getUsername())?>'s <br /> Tagebuch</h2>
     </div>
     <div class="diary-logout">
         <form action="/logout" method="post">
-            <input type="submit" value="Tagebuch schliessen →">
+            <input class="call-to-action" type="submit" value="&laquo; Tagebuch schliessen">
         </form>
     </div>
 </div>
 <div class="diary-contents">
     <div class="diary-create">
-        <a href="/create">Eintrag schreiben →</a>
+        <a class="call-to-action" href="/create">Eintrag schreiben &raquo;</a>
     </div>
     
     <div class="diary-entries">
-        <form action="" method="GET">
-            <h5>Filtern nach:</h5>
-            <label>Kategorie: </label>
-            <select name="filter_by_category_id">
-                <option selected disabled>...Bitte auswählen...</option>
-                <?php foreach (Category::getAll() as $category) { 
-                    $selected = isset($_REQUEST['filter_by_category_id']) && intval($_REQUEST['filter_by_category_id']) == $category->getId();
-                ?>
-                    <option value="<?= $category->getId() ?>" <?= $selected ? 'selected' : '' ?>><?= $category->getCategory() ?></option>
-                <?php } ?>    
-            </select>
-            <br>
-            <label>Datumsbereich: </label>
-            <input type="date" name="filter_by_from_date" value="<?= isset($_REQUEST['filter_by_from_date']) ? $_REQUEST['filter_by_from_date'] : '' ?>">
-            <input type="date" name="filter_by_until_date" value="<?= isset($_REQUEST['filter_by_until_date']) ? $_REQUEST['filter_by_until_date'] : '' ?>">
-            <input type="submit" value="Filter">
+        <form class="diary-filter" action="" method="GET">
+            <div class="filter-row">
+                <div class="filter-col">
+                    <label>Kategorie</label>
+                </div>
+                <div class="filter-col">
+                    <select name="filter_by_category_id">
+                        <option selected disabled>...Alle</option>
+                        <?php foreach (Category::getAll() as $category) { 
+                            $selected = isset($_REQUEST['filter_by_category_id']) && intval($_REQUEST['filter_by_category_id']) == $category->getId();
+                        ?>
+                            <option value="<?= $category->getId() ?>" <?= $selected ? 'selected' : '' ?>><?= $category->getCategory() ?></option>
+                        <?php } ?>    
+                    </select>
+                </div>
+            </div>
+            
+            <div class="filter-row">
+                <div class="filter-col">
+                    <label>Datum</label>
+                </div>
+                <div class="filter-col">
+                    von <input type="date" name="filter_by_from_date" value="<?= isset($_REQUEST['filter_by_from_date']) ? $_REQUEST['filter_by_from_date'] : '' ?>">
+                    <br />
+                    bis <input type="date" name="filter_by_until_date" value="<?= isset($_REQUEST['filter_by_until_date']) ? $_REQUEST['filter_by_until_date'] : '' ?>">
+                </div>
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-col">&nbsp;</div>
+                <div class="filter-col">
+                    <input class="call-to-action" type="submit" value="Filter &raquo;">
+                </div>
+            </div>
         </form>
         <?php if (isset($_REQUEST['filter_by_from_date']) || isset($_REQUEST['filter_by_until_date'])) { ?>
             <form class="deactivate-filter" action="" method="GET">
-                <input type="submit" value="Filter deaktivieren">
+                <input class="call-to-action" type="submit" value="Filter deaktivieren &times;">
             </form>
         <?php } ?>
 
@@ -45,20 +63,24 @@ use WTSA1\Models\Category;
             <p class="diary-empty">Deinem Tagebuch mangelt es an Abenteuern :/</p>    
         <?php } ?>
 
-        <?php foreach($this->data['entries'] as $entry) { ?>
-            <h4>
-                <?=t($entry->getFormattedPublishDate())?>
-                <span class="diary-category">
-                    <?=t($entry->getCategory()->getCategory())?>
-                </span>
-            </h4>
-            <p>
-                <?php if ($entry->getImage()) { ?>
-                    <img src="<?=$entry->getEncodedImage()?>" alt="">
-                <?php } ?>
+        <div class="entry-list">
+            <?php foreach($this->data['entries'] as $entry) { ?>
+                <article>
+                    <h4>
+                        <?=t($entry->getFormattedPublishDate())?>
+                        <span class="diary-category">
+                            <?=t($entry->getCategory()->getCategory())?>
+                        </span>
+                    </h4>
+                    <p>
+                        <?php if ($entry->getImage()) { ?>
+                            <img src="<?=$entry->getEncodedImage()?>" alt="">
+                        <?php } ?>
 
-                <?=t($entry->getContent())?>
-            </p>
-        <?php } ?>
+                        <?=t($entry->getContent())?>
+                    </p>
+                </article>
+            <?php } ?>
+        </div>
     </div>
 </div>

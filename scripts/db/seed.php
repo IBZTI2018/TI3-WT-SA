@@ -53,7 +53,7 @@ function databaseSeed()  {
   $data = array(
     array(1, 1, "2019-12-09", "Heute haben wir den ersten Sprint für unsere WT1 Case-Study begonnen.", NULL),
     array(1, 1, "2019-12-20", "Nach zwei Wochen haben wir den ersten Sprint für unsere Case-Study beendet. Ich denke über die Festtage wird nicht all zu viel passieren, aber mal sehen...", NULL),
-    array(1, 2, "2020-12-24", "Endlich ist Weihnachten!", NULL),
+    array(1, 2, "2019-12-24", "Endlich ist Weihnachten!", NULL),
     array(7, 2, "2019-06-20", "Nachdem ich die Case-Study Aufgabenstellung fertig geschrieben habe, kann ich endlich in die Ferien. Schön, ein paar Wochen Ruhe von all den Studenten zu haben!", NULL),
     array(7, 1, "2020-03-07", "Heute habe ich eine sehr tolle Case-Study Präsentation gesehen. Das Bewerten ist immer so anstrengend, vielleicht sollte ich einfach eine 6 hinschreiben.", NULL)
   );
