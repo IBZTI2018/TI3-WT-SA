@@ -27,15 +27,15 @@ function _valuesForData($list) {
 
 function databaseSeed()  {
 
-  echo "Seeding user table...\r\n";
+  echo "Seeding users table...\r\n";
   $data = array(
     array(1, 'sgehring', PBKDF2::generate('password')),
     array(2, 'aglatzl', PBKDF2::generate('password')),
     array(3, 'aschild', PBKDF2::generate('password'))
   );
-  Database::getInstance()->query("INSERT INTO `user` (id, username, password) VALUES "._valuesForData($data).";");
+  Database::getInstance()->query("INSERT INTO `users` (id, username, password) VALUES "._valuesForData($data).";");
 
-  echo "Seeding category table...\r\n";
+  echo "Seeding categories table...\r\n";
   $data = array(
     array(1, "Unkategorisiert"),
     array(2, "Ferien"),
@@ -43,7 +43,7 @@ function databaseSeed()  {
     array(4, "Familienfest"),
     array(5, "Ausflug")
   );
-  Database::getInstance()->query("INSERT INTO `category` (id, category) VALUES "._valuesForData($data).";");
+  Database::getInstance()->query("INSERT INTO `categories` (id, category) VALUES "._valuesForData($data).";");
 
   echo "Seeding diary entry table...\r\n";
   $data = array(
@@ -54,7 +54,7 @@ function databaseSeed()  {
     array(3, 1, "2020-01-01", "Bewertungswitz")
   );
   Database::getInstance()->query("
-    INSERT INTO `diary_entry` (user_id, category_id, publish_date, content) VALUES "._valuesForData($data).";
+    INSERT INTO `entries` (user_id, category_id, publish_date, content) VALUES "._valuesForData($data).";
   ");
   
   echo "Done!\r\n";

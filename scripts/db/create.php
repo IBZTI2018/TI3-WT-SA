@@ -14,62 +14,63 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 function databaseCreate() {
   
-  echo "Creating `user` table...\r\n";
+  echo "Creating `users` table...\r\n";
   Database::getInstance()->query("
-    CREATE TABLE `user` (
-      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-      `username` varchar(255) NOT NULL DEFAULT '',
-      `password` text NOT NULL,
+    CREATE TABLE `users` (
+      `id` INT(11) unsigned NOT NULL AUTO_INCREMENT,
+      `username` VARCHAR(255) NOT NULL DEFAULT '',
+      `password` TEXT NOT NULL,
       PRIMARY KEY (`id`)
     ) DEFAULT CHARSET=latin1;
   ");
 
   echo "Adding unique constraint on user table for username field...\r\n";
   Database::getInstance()->query("
-    ALTER TABLE `user`
+    ALTER TABLE `users`
       ADD CONSTRAINT constr_username UNIQUE (username);
   ");
 
   echo "Creating `category` table...\r\n";
   Database::getInstance()->query("
-    CREATE TABLE `category` (
-      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-      `category` varchar(255) NOT NULL DEFAULT '',
+    CREATE TABLE `categories` (
+      `id` INT(11) unsigned NOT NULL AUTO_INCREMENT,
+      `category` VARCHAR(255) NOT NULL DEFAULT '',
       PRIMARY KEY (`id`)
     ) DEFAULT CHARSET=latin1;
   ");
 
   echo "Adding unique constraint on category table for category field...\r\n";
   Database::getInstance()->query("
-    ALTER TABLE `category`
+    ALTER TABLE `categories`
       ADD CONSTRAINT constr_category UNIQUE (category);
   ");
 
-  echo "Creating `diary_entry` table...\r\n";
+  echo "Creating `entries` table...\r\n";
   Database::getInstance()->query("
-    CREATE TABLE `diary_entry` (
-      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-      `user_id` int(11) unsigned NOT NULL,
-      `category_id` int(11) unsigned NOT NULL DEFAULT '1',
-      `publish_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      `content` varchar(1000) NOT NULL DEFAULT '',
+    CREATE TABLE `entries` (
+      `id` INT(11) unsigned NOT NULL AUTO_INCREMENT,
+      `user_id` INT(11) unsigned NOT NULL,
+      `category_id` INT(11) unsigned NOT NULL DEFAULT '1',
+      `publish_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      `content` VARCHAR(1000) NOT NULL DEFAULT '',
+      `image` LONGBLOB DEFAULT NULL, 
       PRIMARY KEY (`id`)
     ) DEFAULT CHARSET=latin1;  
   ");
 
-  echo "Adding foreign key relationship between diary_entry.user_id and user.id...\r\n";
+  echo "Adding foreign key relationship between entries.user_id and user.id...\r\n";
   Database::getInstance()->query("
-    ALTER TABLE `diary_entry`
-    ADD CONSTRAINT `fk_diary_entry.user_id__user.id`
-    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    ALTER TABLE `entries`
+    ADD CONSTRAINT `fk_entries.user_id__user.id`
+    FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
     ON DELETE CASCADE ON UPDATE CASCADE;
   ");
 
-  echo "Adding foreign key relationship between diary_entry.category_id and category.id...\r\n";
+  echo "Adding foreign key relationship between entries.category_id and category.id...\r\n";
   Database::getInstance()->query("
-    ALTER TABLE `diary_entry`
-    ADD CONSTRAINT `fk_diary_entry.category_id__category.id`
-    FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
+    ALTER TABLE `entries`
+    ADD CONSTRAINT `fk_entries.category_id__category.id`
+    FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
     ON DELETE CASCADE ON UPDATE CASCADE;
   ");
 

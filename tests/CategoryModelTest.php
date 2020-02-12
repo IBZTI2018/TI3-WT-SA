@@ -15,7 +15,7 @@ class CategoryModelTest extends TestCase {
 
     public function testReturnsCategoryIfFoundById() {
         Database::getInstance()->query("
-          INSERT INTO `category` (id, category)
+          INSERT INTO `categories` (id, category)
           VALUES (44, 'test');
         ");
 

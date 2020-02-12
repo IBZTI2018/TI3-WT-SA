@@ -18,3 +18,7 @@ vendor/
 
 # Ignore all environment files
 *.env
+
+# Ignore VERSION.txt
+VERSION.txt
+history.mp4
