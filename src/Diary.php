@@ -10,6 +10,7 @@ use WTSA1\Pages\LoginPage;
 use WTSA1\Pages\LogoutPage;
 use WTSA1\Pages\RegisterPage;
 use WTSA1\Pages\CreatePage;
+use WTSA1\Pages\ImagePage;
 
 class Diary
 {
@@ -23,6 +24,7 @@ class Diary
 		Route::add('/register', function() {(new RegisterPage())->render(); },  array('get', 'post'));
 		Route::add('/login', function() {(new LoginPage())->render(); }, array('get', 'post'));
 		Route::add('/logout', function() {(new LogoutPage())->render(); }, array('post'));
+		Route::add('/image', function () {(new ImagePage())->render(); }, array('get'));
 
 		// Run Route
 		Route::run('/');
