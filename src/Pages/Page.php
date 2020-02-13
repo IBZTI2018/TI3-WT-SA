@@ -10,6 +10,7 @@ class Page {
      */
     protected $template = null;
     protected $data = array();
+    protected $no_layout = false;
 
 
     /**
@@ -47,9 +48,13 @@ class Page {
         }
 
         ob_start();
-        include(TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'Components/Header.phtml');
+        if (!$this->no_layout) {
+            include(TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'Components/Header.phtml');
+        }
         include(TEMPLATE_DIR . DIRECTORY_SEPARATOR . $this->template);
-        include(TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'Components/Footer.phtml');
+        if (!$this->no_layout) {
+            include(TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'Components/Footer.phtml');
+        }
         $content = ob_get_contents();
         ob_end_clean();
         echo $content;
