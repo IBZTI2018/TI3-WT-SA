@@ -27,7 +27,7 @@
             </h4>
             <p>
                 <?php if ($entry->getImage()) { ?>
-                    <a alt="Open image in fullscreen" href="/image?entry_id=<?= $entry->getId() ?>" target="_blank"><img src="<?=$entry->getEncodedImage()?>" alt=""></a>
+                    <a alt="Open image in fullscreen" href="/image?entry_id=<?= $entry->getId() ?>"><img src="<?=$entry->getEncodedImage()?>" alt=""></a>
                 <?php } ?>
 
                 <?=t($entry->getContent())?>
