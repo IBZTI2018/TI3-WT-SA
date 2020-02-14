@@ -211,18 +211,13 @@ body {
 }
 
 .git-version {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    font-family: monospace;
     font-size: 10px;
-    background-color: rgba(0,0,0,0.4);
-    border-radius: 6px;
-    padding: 0 20px;
     color: white;
-    font-family: initial;
     letter-spacing: 0.3px;
-    white-space: nowrap;
 }
 
 /*
