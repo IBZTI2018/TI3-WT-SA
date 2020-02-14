@@ -1,19 +1,19 @@
 <div class="diary-content table">
     <div class="diary-auth">
-        <h1>Tagebuch erstellen</h1>
+        <h1>SimpleDiary</h1>
 
         <span>
-            <a class="call-to-action" href="/login">← Einloggen</a>
+            <a class="call-to-action" href="/login">&laquo; Einloggen</a>
         </span>
 
         <form action="/register" method="POST">
-            <input type="text" name="username" value="<?=ta($_REQUEST, "username")?>" placeholder="Username">
+            <input type="text" name="username" value="<?=ta($_REQUEST, "username")?>" placeholder="Benutzername">
             <br>
             <input type="password" name="password" value="<?=ta($_REQUEST, "password")?>" placeholder="Passwort">
             <br>
             <input type="password" name="passwordrep" value="<?=ta($_REQUEST, "passwordrep")?>" placeholder="Passwort wiederholen">
             <br>
-            <input type="submit" value="Erstellen">
+            <input type="submit" value="Registrieren">
         </form>
 
         <div class="error"><?=ta($this->data, "error"); ?></div>

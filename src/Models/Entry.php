@@ -141,7 +141,7 @@ class Entry {
         $query = "
             SELECT * FROM `entries` WHERE user_id = ?
             $filter_by_condition
-            ORDER BY `publish_date` DESC;
+            ORDER BY `publish_date` DESC, `id` DESC;
         ";
         $result = Database::getInstance()->query($query, array($user_id));
 

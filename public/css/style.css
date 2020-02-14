@@ -23,7 +23,7 @@
 }
 
 * {
-    font-family: 'Caveat', cursive;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -33,7 +33,6 @@ body {
     background-image: url('/public/assets/wood.png');
     background-repeat: repeat;
     background-color: #C3D0AB;
-    font-family: 'Caveat', cursive;
     overflow: hidden;
 }
 
@@ -66,7 +65,8 @@ body {
 .diary-body {
     max-width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: scroll;
     position: relative;
 }
 
@@ -99,7 +99,7 @@ body {
     border-left: 1px solid #333;
     background-image: url('/public/assets/leather.jpg');
     background-repeat: repeat;
-    background-color: #CCC;
+    background-color: #873600;
 }
 
 .diary-open .diary-body {
@@ -131,7 +131,7 @@ body {
     border-bottom-right-radius: 15px;
     background-image: url('/public/assets/leather.jpg');
     background-repeat: repeat;
-    background-color: #CCC;
+    background-color: #873600;
 }
 
 .diary-sidepage:nth-child(1) { margin-top: 3px; }
@@ -202,7 +202,7 @@ body {
     border-bottom-right-radius: 15px;
     background-image: url('/public/assets/leather.jpg');
     background-repeat: repeat;
-    background-color: #CCC;
+    background-color: #873600;
 }
 
 .git-version {
@@ -232,10 +232,11 @@ body {
 
 .diary-auth h1 {
     margin-top: 0;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     color: #D19F72;
-    font-size: 2.5em;
+    font-size: 2.8em;
     text-shadow: 2px 2px 3px #873600;
+    font-family: 'Caveat', cursive;
 }
 
 .diary-auth span {
@@ -254,21 +255,22 @@ body {
 }
 
 .diary-auth form {
-    padding-top: 20px;
+    padding-top: 40px;
 }
 
 .diary-auth form input {
+    width: 40%;
     border: 1px dotted #E59866;
     background: none !important;
     outline: none !important;
     box-shadow: none !important;
     margin-bottom: 20px;
-    padding: 5px 10px;
+    padding: 7px 10px;
     text-align: center;
-    font-family: 'Caveat', cursive;
     color: #FFF !important;
-    font-size: 1.2em;
+    font-size: 1em;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .diary-auth form input::placeholder {
@@ -282,6 +284,7 @@ body {
 .diary-auth input[type="submit"] {
     border: 1px solid #B7950B;
     transition: all 0.2s ease-in-out;
+    font-size: 0.8em;
     color: #FFF !important;
 }
 
@@ -314,6 +317,7 @@ body {
     padding: 0;
     font-size: 1.8em;
     color: #A52A2A;
+    font-family: 'Caveat', cursive;
 }
 
 .diary-logout {
@@ -322,31 +326,29 @@ body {
 }
 
 .diary-logout input {
-    margin: 0;
-    padding: 10px;
-    background: none !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    font-size: 1.3em;
-    color: #A52A2A;
+    border: none;
 }
 
-.diary-logout input:hover,
-.diary-logout input:focus {
-    display: inline-block;
+.diary-logout input:hover {
     cursor: pointer;
-    border-left: 1px dotted #A52A2A !important;
-    border-radius: 50%;
 }
 
 /**
  * Home page
  */
+.entry-list,
+.entry-list * {
+    font-family: 'Caveat', cursive;
+    font-size: 1.12em;
+}
+
 .diary-empty {
-    margin: 17px 0 0 0 !important;
+    margin: 30px 0 0 0 !important;
     padding: 0;
     text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 1.4em;
+    color: #873600;
 }
 
 .diary-create {
@@ -355,20 +357,11 @@ body {
     padding: 0 20px;
     box-sizing: border-box;
     text-align: right;
+    margin-top: -34px;
 }
 
 .diary-create a {
-    display: inline-block;
-    padding: 5px 10px;
-    font-size: 1.3em;
-    color: #A52A2A;
     text-decoration: none;
-}
-
-.diary-create a:hover {
-    cursor: pointer;
-    border-left: 1px dotted #A52A2A !important;
-    border-radius: 50%;
 }
 
 .diary-entries {
@@ -386,23 +379,55 @@ body {
     margin-left: 10px;
     max-width: 30%;
     float: right;
-    transform: rotate(5deg);
+    transform: rotate(2deg);
+    transition: transform 0.3s ease-in-out;
     border: 2px solid brown;
+}
+
+.diary-entries p img:hover {
+    transform: rotate(-5deg) scale(1.1);
+    cursor: pointer;
 }
 
 .diary-entries h4 {
     margin-bottom: 0;
 }
 
-.diary-entries form:not(.deactivate-filter) {
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 10px;
+.diary-filter .filter-row {
+    width: 100%;
+    display: flex;
+    padding-bottom: 5px;
 }
 
-.diary-entries .deactivate-filter {
-    width: 100%;
-    background-color: orange;
-    color: black;
+.diary-filter .filter-col {
+    flex-direction: row;
+    width: 40%;
+}
+
+.diary-filter .filter-col:last-of-type {
+    width: 60%;
+    text-align: right;
+}
+
+.diary-filter {
+    margin-top: 20px;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-top: 2px dotted #D19F72;
+    border-bottom: 2px dotted #D19F72;
+}
+
+.deactivate-filter {
+    text-align: right;
+}
+
+.deactivate-filter input {
+    border: none;
+}
+
+.deactivate-filter input:hover {
+    cursor: pointer;
 }
 
 .diary-category {
@@ -413,9 +438,18 @@ body {
 }
 
 .error {
-    font-size: 1.1em;;
+    padding-top: 15px;
+    font-size: 1.4em;
     color: #F2D7D5;
     min-height: 20px;
+    font-family: 'Caveat', cursive;
+    text-align: center;
+}
+
+.error.dark {
+    margin-top: 0;
+    padding-top: 0;
+    color: red;
 }
 
 /*
@@ -424,18 +458,158 @@ body {
 .diary-auth a.call-to-action,
 .call-to-action {
     background-color: #800000;
-    box-shadow: 3px 3px 0px #570303;
+    box-shadow: 2px 2px 0px #570303;
     border-radius: 30px;
-    padding: 0 30px;
+    padding: 4px 30px;
     color: white;
-    transition: background-color 0.2s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out;
+    font-size: 0.8em;
 }
 
 .diary-auth a.call-to-action:hover,
 .call-to-action:hover {
-    background-color: #570303;
-    box-shadow: 3px 3px 0px #800000;
-    border-radius: 30px;
-    padding: 0 30px;
-    color: white;
+    background-color: #800000;
+    box-shadow: inset 2px 2px 0px #570303;
+}
+
+input.call-to-action {
+    border: none;
+}
+
+a.call-to-action {
+    text-decoration: none;
+}
+
+input.call-to-action:hover {
+    cursor: pointer;
+}
+
+.create-title {
+    margin: 0;
+    padding: 20px 0 0 20px;
+    font-family: 'Caveat', cursive;
+    color: #A52A2A;
+}
+
+.create-back {
+    text-align: right;
+    padding-right: 20px;
+    margin-bottom: 20px;
+    margin-top: -30px;
+}
+
+.create-form {
+    padding: 20px;
+}
+
+.create-row {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.create-col {
+    flex-direction: row;
+    width: 30%;
+}
+
+.create-col:last-of-type {
+    width: 70%;
+}
+
+.create-col input,
+.create-col select {
+    width: 100%;
+}
+
+.create-col textarea {
+    width: 100%;
+    min-height: 200px;
+    resize: vertical;
+    background: none;
+    font-family: 'Caveat', cursive;
+    font-size: 1.26em;
+    border: 1px dotted #B7950B;
+    transition: border 0.2s ease-in-out;
+    outline: none;
+    box-shadow: none;
+}
+
+.create-col textarea:hover,
+.create-col textarea:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #B7950B;
+}
+
+
+/* Special open cover on desktop */
+.diary-open-cover {
+    display: none;
+}
+
+@media screen and (min-width: 1400px) {
+    .diary-open .diary-container {
+        position: relative;
+    }
+    
+    .diary-open .diary-container .diary-open-cover {
+        content: ' ';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        margin-top: 1px;
+        margin-left: -96%;
+        margin-left: calc( -100% + 16px );
+        transform: rotateY(180deg);
+    }
+
+    .diary-open-cover.animate {
+        animation-name: openbook;
+        animation-duration: 2s;
+    }
+
+    .diary-open .diary-open-cover::after {
+        content: ' ';
+        clear: both;
+    }
+
+    .diary-open .diary-open-cover-side {
+        display: block;
+        width: 50%;
+        height: 100%;
+        float: left;
+    }
+
+    .diary-open-cover-side.covered {
+        background-image: url('/public/assets/leather.jpg');
+        background-repeat: repeat;
+        background-color: #873600;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    .diary-open .diary-body {
+        z-index: 50;
+    }
+
+    @keyframes openbook {
+        0% {
+            transform: rotateY(0deg);
+            z-index: 100;
+        }
+
+        99% {
+            transform: rotateY(180deg);
+            z-index: 100;
+        }
+
+        100% {
+            transform: rotateY(180deg);
+            z-index: 0;
+        }
+      }
 }
