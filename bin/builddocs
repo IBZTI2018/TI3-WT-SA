@@ -1,0 +1,4 @@
+#!/bin/bash
+# Compiles the Latex documentation with Docker
+cd ..
+docker run --rm -v $(pwd)/docs:/source schickling/latex pdflatex -interaction nonstopmode index.tex

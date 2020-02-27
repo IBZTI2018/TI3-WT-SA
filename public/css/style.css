@@ -409,6 +409,18 @@ body {
     text-align: right;
 }
 
+.diary-filter .filter-col.large {
+    width: 90%;
+}
+
+.diary-filter .filter-col.small {
+    width: 10%;
+}
+
+.diary-filter .info {
+    font-size: 12px;
+}
+
 .diary-filter {
     margin-top: 20px;
     padding-top: 20px;

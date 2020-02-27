@@ -27,6 +27,13 @@ class HomePage extends Page {
             }
             $filter_by['publish_date'][1] = $_REQUEST['filter_by_until_date'];
         }
+
+        if (!empty($_REQUEST['filter_by_from_date']) && !empty($_REQUEST['filter_by_until_date'])) {
+            if (!empty($_REQUEST['show_days_with_no_entries']) && $_REQUEST['show_days_with_no_entries'] == "1") {
+                $filter_by['show_days_with_no_entries'] = true;
+            }
+        }
+
         $this->data['entries'] = Entry::getEntriesForCurrentUser($filter_by);
     }
 }
