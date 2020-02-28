@@ -83,11 +83,11 @@ use WTSA1\Models\Category;
                             <span class="diary-category">
                                 <?=t($entry->getCategory()->getCategory())?>
                             </span>
-                        <? } else { ?>
+                        <?php } else { ?>
                             <span class="diary-category">
                                 Keine Einträge
                             </span>
-                        <? } ?>
+                        <?php } ?>
                     </h4>
                     <p>
                         <?php if ($entry->getImage()) { ?>
