@@ -91,7 +91,9 @@ use WTSA1\Models\Category;
                     </h4>
                     <p>
                         <?php if ($entry->getImage()) { ?>
-                            <img src="<?=$entry->getEncodedImage()?>" alt="">
+                            <a alt="" title="Vollbild anzeigen" href="/image?entry_id=<?= $entry->getId() ?>">
+                                <img src="<?=$entry->getEncodedImage()?>" alt="">
+                            </a>
                         <?php } ?>
 
                         <?=t($entry->getContent())?>
