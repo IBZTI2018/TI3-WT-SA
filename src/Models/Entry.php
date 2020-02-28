@@ -79,6 +79,7 @@ class Entry {
      */
     public static function getEntriesForCurrentUser($filter_by = array()) {
         if (Session::getInstance()->getUser() == null) return array();
+        $original_filter_by = $filter_by;
 
         $filter_by_condition = "";
         if (count($filter_by) > 0) {
@@ -86,7 +87,7 @@ class Entry {
              * Only allow certain fields to be filtered
              */ 
             $filter_by = array_filter($filter_by, function($key) {
-                return $key == 'category_id' || $key == 'publish_date';
+                return $key == 'category_id' || $key == 'publish_date' || $key == 'show_days_with_no_entries';
             }, ARRAY_FILTER_USE_KEY);
 
             /*
@@ -146,9 +147,44 @@ class Entry {
         $result = Database::getInstance()->query($query, array($user_id));
 
         if (!is_array($result)) return array();
-        return array_map(function($item) {
+        $entries =  array_map(function($item) {
             return Entry::parse(array($item));
         }, $result);
+
+        if (!empty($filter_by['show_days_with_no_entries']) && !empty($filter_by['publish_date'])) {
+            $entries_by_date = array();
+            foreach ($entries as $entry) {
+                /** @var Entry $entry */
+                $publish_date = date('Y-m-d', strtotime($entry->getPublishDate()));
+                if (empty($entries_by_date[$publish_date])) {
+                    $entries_by_date[$publish_date] = array();
+                }
+                array_push($entries_by_date[$publish_date], $entry);
+            }
+            $begin = new \DateTime($original_filter_by['publish_date'][0]);
+            $begin->setTime(0,0,0);
+            $end = new \DateTime($original_filter_by['publish_date'][1]);
+            $end->setTime(0,0,1);
+
+            $interval = \DateInterval::createFromDateString('1 day');
+            $period = new \DatePeriod($begin, $interval, $end);
+
+            foreach ($period as $dt) {
+                $publish_date = $dt->format("Y-m-d");
+                if (empty($entries_by_date[$publish_date])) {
+                    $empty_entry = new Entry();
+                    $empty_entry->setPublishDate($publish_date);
+                    $entries_by_date[$publish_date] = [$empty_entry];
+                }
+            }
+
+            $entries = array();
+            ksort($entries_by_date);
+            foreach ($entries_by_date as $entries_group) {
+                $entries = array_merge($entries, array_values($entries_group));
+            }
+        }
+        return $entries;
     }
 
     /**

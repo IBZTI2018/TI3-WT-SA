@@ -47,6 +47,17 @@ use WTSA1\Models\Category;
             </div>
 
             <div class="filter-row">
+                <div class="filter-col large">
+                    <label>Tage ohne Einträge*</label>
+                    <br>
+                    <span class="info">*Erfordert Datumsbereich</span>
+                </div>
+                <div class="filter-col small">
+                    <input type="checkbox" name="show_days_with_no_entries" value="1" <?= isset($_REQUEST['show_days_with_no_entries']) ? 'checked' : '' ?>>
+                </div>
+            </div>
+
+            <div class="filter-row">
                 <div class="filter-col">&nbsp;</div>
                 <div class="filter-col">
                     <input class="call-to-action" type="submit" value="Filter &raquo;">
@@ -68,13 +79,21 @@ use WTSA1\Models\Category;
                 <article>
                     <h4>
                         <?=t($entry->getFormattedPublishDate())?>
-                        <span class="diary-category">
-                            <?=t($entry->getCategory()->getCategory())?>
-                        </span>
+                        <?php if ($entry->getCategory()) { ?>
+                            <span class="diary-category">
+                                <?=t($entry->getCategory()->getCategory())?>
+                            </span>
+                        <?php } else { ?>
+                            <span class="diary-category">
+                                Keine Einträge
+                            </span>
+                        <?php } ?>
                     </h4>
                     <p>
                         <?php if ($entry->getImage()) { ?>
-                            <img src="<?=$entry->getEncodedImage()?>" alt="">
+                            <a alt="" title="Vollbild anzeigen" href="/image?entry_id=<?= $entry->getId() ?>">
+                                <img src="<?=$entry->getEncodedImage()?>" alt="">
+                            </a>
                         <?php } ?>
 
                         <?=t($entry->getContent())?>
