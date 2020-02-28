@@ -1,31 +1,70 @@
-\subsection{Systemziele}
+\subsection{Projektziele}
+Nachfolgend werden die relevanten Projektziele aufgelistet. Die Ziele sind dabei nach Stakeholder unterteilt und bestehen aus den funktionalen Anforderungen (FA), sowie den nicht-funktionalen Anforderungen (NFA) der Case-Study, und zusätzlichen Zielen, welche sich aus den restlichen Stakeholdern ergeben.
+Die Ziele sind nachfolgend in Muss- (\textbf{M}) und Wunschziele (\textbf{W}) eingeteilt.
 
+\vspace{5mm}
 
+\begin{longtable}{ p{2.2cm}|p{10cm}|c|c  }
+    \textbf{Stakeholder} & \textbf{Ziel} & \textbf{M} & \textbf{W} \\
+    \hline
+    Benutzer & FA\_1.1 Tagebucheinträge müssen erfasst werden können & x & \\
+    & FA\_1.2 Jeder Tagebucheintrag hat ein auswählbares Datum & x & \\
+    & FA\_1.3 Jeder Tagebucheintrag kann einer Kategorie zugeordnet werden & x & \\
+    & FA\_1.4 Zu jedem Eintrag kann ein Freitext inkl. Sonderzeichen von bis zu 1000 Zeichen erfasst werden. & x & \\
+    & FA\_1.5 Zu jedem Eintrag kann ein Bild erfasst werden. & & 3 \\
+    & FA\_1.8 Einträge können nach Datum gefiltert werden. & & 4 \\
+    & FA\_1.9 Einträge können nach Kategorie gefiltert werden. & & 4 \\
+    & FA\_1.10 Es kann abgefragt werden, für welche Tage keine Tagebucheinträge vorhanden sind. & & 3 \\
+    & FA\_1.11 Das Tagebuch ist mit einem Login geschützt. & x & \\
+    & FA\_1.12 Ein Nutzer kann sich ein Login erstellen. & x & \\
+    & NFA\_1.1 Das Tagebuch ist für unerfahrene Nutzer intuitiv zu bedienen & & 5 \\
+    & NFA\_1.2 Das Tagebuch soll ein zeitgemässes Design besitzen & & 4 \\
+    Sysadmin & FA\_1.6 Jeder Tagebucheintrag wird in der Datenbank gespeichert. &x & \\
+    & FA\_1.7 Die Kategorien sind in der Datenbank gespeichert. & x& \\
+    & FA\_1.13 Jeder User sieht nur seine eigenen Einträge & x & \\
+    & NFA\_1.3 Das Tagebuch ist unter Windows und Linux lauffähig & & 4 \\
+    & NFA\_1.4 Die Antwortszeigt des Tagebuchs liegt unter 3s & & 4 \\
+    & NFA\_1.5 Das Tagebuch muss online sein & x & \\
+    & Passwörter werden sicher gespeichert (PBKDF2 hash) & & 5 \\
+    Entwickler & Die Dokumentation soll in \LaTeX geschrieben werden & & 3 \\
+    & Es soll Versionskontrolle mit Git verwendet werden & & 5 \\
+    Reviewer & Tests sollen in der Dokumentation ersichtlich sein & & 4 \\
+    & Das gewählte System muss einfach erweiterbar sein & & 5 \\
+    & Aktuelle Revision soll auf der Seite angezeigt werden & & 5 \\
+    & ERM und Klassendiagramm soll verfügbar sein & & 4 \\
+\end{longtable}
 
-\begin{tabular}{ |p{4cm}||p{7cm}|p{1cm}|p{1cm}|  }
+\noindent
+Nachfolgend werden die aufgestellten Ziele in verschiedene Kategorien eingeteilt, um die Lösungsfindung zu veranschaulichten. Hierbei ist anzumerken, dass durch das Agile Projektmanagement die Lösungsfindung eher oberflächlich ausfällt und detaillierte Entscheidungen erst beim Grooming der jeweiligen User-Story gefällt wurden.
+
+Die Ziele werden dabei in die Kategorien Framework (\textbf{F}), Sicherheit (\textbf{S}), Erfassung (\textbf{E}) Management (\textbf{M}) und Projekt (\textbf{P}) eingeteilt
+
+\begin{longtable}{ p{10cm}ccccc }
+    \textbf{Ziel} & \textbf{F} & \textbf{S} & \textbf{E} & \textbf{M} & \textbf{P} \\
     \hline
-    Stakeholder & Ziel & Muss & Wunsch\\
-    \hline
-    Systemadministrator     &   Nutzerdaten in der Datenbank speichern  &   X   &       \\
-    Benutzer                &   Anmelden mit Benutzerdaten              &   X   &       \\
-    Benutzer                &   Registrieren mit neuen Benutzerdaten    &   X   &       \\
-    Systemadministrator     &   Passwörter mit PBKDF2 hashen            &       &   X   \\
-    Systemadministrator     &   Datenbank-Reset Hook für Deployment     &       &   X   \\
-    Benutzer                &   Neuen Tagebucheintrag erfassen          &   X   &       \\
-    Benutzer                &   Kategorien erstellen                    &   X   &       \\
-    Benutzer                &   Ausloggen untersützen                   &   X   &       \\
-    Benutzer                &   Grundlegendes Design                    &       &   X   \\
-    Benutzer                &   Anzeigen von Einträgen                  &   X   &       \\
-    Systemadministrator     &   ERM-Diagramm                            &   X   &       \\
-    Systemadministrator     &   Systemkontextdiagramm                   &   X   &       \\
-    Entwickler              &   Commit-Version Anzeigen                 &       &   X   \\
-    Benutzer                &   Tagebucheinträge filtern                &   X   &       \\
-    Benutzer                &   Bilder für Einträge speichern           &   X   &       \\
-    Benutzer                &   Bild vergrössen                         &       &   X   \\
-    Benutzer                &   Design überarbeiten                     &       &   X   \\
-    Reviewer                &   Tests in Dokumentation einfügen         &   X   &       \\
-    Entwickler              &   Klassendiagramm MVC Framework           &   X   &       \\
-    \hline
-   \end{tabular}
-   
-   
+    FA\_1.1 Tagebucheinträge müssen erfasst werden können &&&x& \\
+    FA\_1.2 Jeder Tagebucheintrag hat ein auswählbares Datum &&&x& \\
+    FA\_1.3 Jeder Tagebucheintrag kann einer Kategorie zugeordnet werden &&&x& \\
+    FA\_1.4 Zu jedem Eintrag kann ein Freitext inkl. Sonderzeichen von bis zu 1000 Zeichen erfasst werden. &&&x& \\
+    FA\_1.5 Zu jedem Eintrag kann ein Bild erfasst werden. &&&x& \\
+    FA\_1.8 Einträge können nach Datum gefiltert werden. &&&&x \\
+    FA\_1.9 Einträge können nach Kategorie gefiltert werden. &&&&x \\
+    FA\_1.10 Es kann abgefragt werden, für welche Tage keine Tagebucheinträge vorhanden sind. &&&&x \\
+    FA\_1.11 Das Tagebuch ist mit einem Login geschützt. &&x&& \\
+    FA\_1.12 Ein Nutzer kann sich ein Login erstellen. &&x&& \\
+    NFA\_1.1 Tagebuch ist für unerfahrene Nutzer intuitiv zu bedienen &x&&& \\
+    NFA\_1.2 Das Tagebuch soll ein zeitgemässes Design besitzen &x&&& \\
+    FA\_1.6 Jeder Tagebucheintrag wird in der Datenbank gespeichert. &&&x& \\
+    FA\_1.7 Die Kategorien sind in der Datenbank gespeichert. &&&x& \\
+    FA\_1.13 Jeder User sieht nur seine eigenen Einträge &&x&& \\
+    NFA\_1.3 Das Tagebuch ist unter Windows und Linux lauffähig &x&&& \\
+    NFA\_1.4 Die Antwortszeigt des Tagebuchs liegt unter 3s &x&&& \\
+    NFA\_1.5 Das Tagebuch muss online sein &x&&& \\
+    Passwörter werden sicher gespeichert (PBKDF2 hash) &&x&& \\
+    Die Dokumentation soll in \LaTeX geschrieben werden &&&&&x \\
+    Es soll Versionskontrolle mit Git verwendet werden &&&&&x \\
+    Das gewählte System muss einfach erweiterbar sein &x&&&& \\
+    Tests sollen in der Dokumentation ersichtlich sein &&&&&x \\
+    Aktuelle Revision soll auf der Seite angezeigt werden &&&&&x \\
+    ERM und Klassendiagramm soll verfügbar sein &&&&&x \\
+\end{longtable}
