@@ -1,66 +1,37 @@
 \subsection{Testfälle}
-Die Testfälle (Unit \& Functional tests) wurden mit PHP geschrieben und werden mit PHPUnit ausgeführt.\\
-PHPUnit läuft auf eine separate Datenbank, bzw. bei einer Testdatenbank. \\
-Sobald alle Testfälle ausgeführt worden sind, wird die ganze Datenbank entleert. \\
-\textbf{NOTIZ: } Beim Aufsetzen gewisser Testfälle, wird die Testdatenbank mit Seed-Data befüllt.\\
+Die Testfälle (Unit \& Integrationtests) wurden mit PHP geschrieben und werden mit PHPUnit ausgeführt. PHPUnit greift dabei auf die selbe Datenbank zu, die Änderungen werden allerdings in Transactions isoliert, welche nicht in der Datenbank gespeichert werden.
 
-\noindent
-Nachfolgend werden sämtliche Testfälle aufgelistet.\\
+Da die Tests komplett automatisiert mittels Test-Framework durchgeführt werden, wurde entschieden an dieser Stelle nicht die kompletten Testabläufe aufzuführen, sondern nur eine Liste von vorhandenen Testfällen zusammenzufassen.
 
-
-\subsubsection*{\#1 Testabläufe für den Model: Category}
-- Überprüfen ob bei nicht existierende Kategorie-ID, null zurückgegeben wird.\\
-- Überprüfen ob bei existierende Kategorie-ID, Category zurückgegeben wird.
-
-\subsubsection*{\#2 Testabläufe für die Datenbank}
+\subsubsection*{Testabläufe für die Datenbank}
 - Überprüfen ob ein UNIQUE CONSTRAINT beim `username`-Feld aus der Tabelle `users` gesetzt ist.\\
 - Überprüfen ob ein UNIQUE CONSTRAINT beim `category`-Feld aus der Tabelle `categories` gesetzt ist.
 
-\subsubsection*{\#3 Testabläufe für den Model: Entry}
-- Überprüfen ob die richtige Tageseinträge für ein bestimmten Benutzer aufgelistet werden.\\
-- Überprüfen ob alle Tageseinträge vom Benutzer aus der Datenbank ausgelesen werden.\\
+\subsubsection*{Testabläufe für das PBKDF2 Algorithmus}
+- Überprüfen ob für das gleiche Passwort zwei verschiedene Hashs generiert werden.
+
+\subsubsection*{Testabläufe für das Category-Model}
+- Überprüfen ob bei nicht existierende Kategorie-ID, null zurückgegeben wird.\\
+- Überprüfen ob bei existierende Kategorie-ID, Category zurückgegeben wird.
+
+\subsubsection*{Testabläufe für das Entry-Model}
+- Überprüfen ob die richtigen Tagebucheinträge für ein bestimmten Benutzer aufgelistet werden.\\
+- Überprüfen ob alle Tagebucheinträge vom Benutzer aus der Datenbank ausgelesen werden.\\
 - Überprüfen ob FOREIGN KEY VIOLATION beim user\_id Feld aktiviert wird bei wiederholende IDs.\\
 - Überprüfen ob beim user\_id existierende Foreign Key ID's akzeptiert werden.\\
 - Überprüfen ob FOREIGN KEY VIOLATION beim category\_id Feld aktiviert wird bei wiederholende IDs.\\
 - Überprüfen ob beim category\_id existierende Foreign Key ID's akzeptiert werden.\\
 - Überprüfen ob das gespeicherte Bild, das richtige Encoding hat.\\
-- Überprüfen ob Tageseinträge für ein bestimmtes Datenbereich aus der Datenbank ausgelesen werden.\\
-- Überprüfen ob Tageseinträge für eine bestimmte Kategorie aus der Datenbank ausgelesen werden.\\
-- Überprüfen ob Tageseinträge für ein bestimmtes Datenbereich sowie auch für eine bestimmte Kategorie aus der Datenbank ausgelesen werden.\\
-- Überprüfen ob Tageseinträge fir eine nicht existierende Kategorie aus der Datenkbank nicht ausgelesen werden.\\
-- Überprüfen ob bei angeklickte Checkbox, leere Tageseinträge für ein bestimmten Datumsbereich angezeigt werden, falls mindestens ein echten Eintrag vorhanden ist.\\
-- Überprüfen ob bei angeklickte Checkbox, leere Tageseinträge für ein bestimmten Datumsbereich angezeigt werden, falls kein echten Eintrag vorhanden ist.\\
-- Überprüfen ob bei nicht angeklickte Checkbox, keine leere Tageseinträge für ein bestimmten Datumsbereich angezeigt werden.\\
-- Überprüfen ob bei angeklickte Checkbox, keine leere Tageseinträge für kein bestimmten Datumsbereich angezeigt werden.
+- Überprüfen ob Tagebucheinträge für einen bestimmten Datumsbereich aus der Datenbank ausgelesen werden.\\
+- Überprüfen ob Tagebucheinträge für eine bestimmte Kategorie aus der Datenbank ausgelesen werden.\\
+- Überprüfen ob Tagebucheinträge für ein bestimmtes Datumsbereich sowie auch für eine bestimmte Kategorie aus der Datenbank ausgelesen werden.\\
+- Überprüfen ob Tagebucheinträge für eine nicht existierende Kategorie aus der Datenkbank nicht ausgelesen werden.\\
+- Überprüfen ob bei angeklickter Checkbox leere Tagebucheinträge für ein bestimmten Datumsbereich angezeigt werden, falls mindestens ein echter Eintrag vorhanden ist.\\
+- Überprüfen ob bei angeklickter Checkbox, leere Tagebucheinträge für ein bestimmten Datumsbereich angezeigt werden, falls kein echter Eintrag vorhanden ist.\\
+- Überprüfen ob bei nicht angeklickter Checkbox, keine leeren Tagebucheinträge für ein bestimmten Datumsbereich angezeigt werden.\\
+- Überprüfen ob bei angeklickter Checkbox, keine leeren Tagebucheinträge für keinen bestimmten Datumsbereich angezeigt werden.
 
-\subsubsection*{\#4 Testabläufe für die 'Tagebucheintrag erstellen'-Seite}
-- Überprüfen ob ein Fehler angezeigt wird, falls das Veröffentlichungsdatum leer ist.\\
-- Überprüfen ob ein Fehler angezeigt wird, falls die Kategorie leer ist.\\
-- Überprüfen ob ein Fehler angezeigt wird, falls der Inhalt leer ist.\\
-- Überprüfen ob ein Fehler angezeigt wird, falls der Inhalt mehr als 1000 Zeichen beträgt.\\
-- Überprüfen ob ein Tagebucheintrag erfolgreich erstellt werden kann.\\
-- Überprüfen ob ein Tagebucheintrag mit ein Bild erfolgreich erstellt werden kann.
-
-\subsubsection*{\#5 Testabläufe für die 'Einloggen'-Seite}
-- Überprüfen ob ein Fehler angezeigt wird, falls der Benutzername leer ist.\\
-- Überprüfen ob ein Fehler angezeigt wird, falls das Passwort leer ist.\\
-- Überprüfen ob ein Fehler angezeigt wird, falls die Login-Daten falsch sind.\\
-- Überprüfen ob man mit validen Login-Daten, sich einloggen kann.
-
-\subsubsection*{\#6 Testabläufe für die 'Ausloggen'-Seite}
-- Überprüfen ob nach dem Ausloggen, der Benutzer nicht mehr eingeloggt ist.
-
-\subsubsection*{\#7 Testabläufe für die 'Tagebuch erstellen'-Seite}
-- Überprüfen ob ein Fehler angezeigt wird, falls der Benutzername leer ist.\\
-- Überprüfen ob ein Fehler angezeigt wird, falls das Passwort leer ist.\\
-- Überprüfen ob ein Fehler angezeigt wird, falls die Passwörter nicht übereinstimmen.\\
-- Überprüfen ob ein Fehler angezeigt wird, falls das angegebene Benutzername bereits verwendet wird.\\
-- Überprüfen ob mit validen Daten ein Benutzer gelegt werden kann und ob nach der Registrierung, der Benutzer eingeloggt ist.
-
-\subsubsection*{\#8 Testabläufe für das PBKDF2 Algorithmus}
-- Überprüfen ob für das gleiche Passwort, zwei verschiedene Hashs generiert werden.
-
-\subsubsection*{\#9 Testabläufe für den Model: User}
+\subsubsection*{Testabläufe für das User-Model}
 - Überprüfen ob das Einloggen bei nicht existierende Daten fehlschlägt.\\
 - Überprüfen ob das Einloggen mit einem falschen Benutzername fehlschlägt.\\
 - Überprüfen ob das Einloggen mit ein falsches Passwort fehlschlägt.\\
@@ -72,7 +43,31 @@ Nachfolgend werden sämtliche Testfälle aufgelistet.\\
 - Überprüfen ob bei nicht existierender Benutzername, null zurückgegeben wird.\\
 - Überprüfen ob bei existierender Benutzename, User zurückgegeben wird.
 
-\subsubsection*{\#10 Testabläufe für die 'Bildansicht'-Seite}
+\subsubsection*{Testabläufe für die 'Tagebucheintrag erstellen'-Seite}
+- Überprüfen ob ein Fehler angezeigt wird, falls das Veröffentlichungsdatum leer ist.\\
+- Überprüfen ob ein Fehler angezeigt wird, falls die Kategorie leer ist.\\
+- Überprüfen ob ein Fehler angezeigt wird, falls der Inhalt leer ist.\\
+- Überprüfen ob ein Fehler angezeigt wird, falls der Inhalt mehr als 1000 Zeichen beträgt.\\
+- Überprüfen ob ein Tagebucheintrag erfolgreich erstellt werden kann.\\
+- Überprüfen ob ein Tagebucheintrag mit ein Bild erfolgreich erstellt werden kann.
+
+\subsubsection*{Testabläufe für die 'Einloggen'-Seite}
+- Überprüfen ob ein Fehler angezeigt wird, falls der Benutzername leer ist.\\
+- Überprüfen ob ein Fehler angezeigt wird, falls das Passwort leer ist.\\
+- Überprüfen ob ein Fehler angezeigt wird, falls die Login-Daten falsch sind.\\
+- Überprüfen ob man mit validen Login-Daten, sich einloggen kann.
+
+\subsubsection*{Testabläufe für die 'Ausloggen'-Seite}
+- Überprüfen ob nach dem Ausloggen der Benutzer nicht mehr eingeloggt ist.
+
+\subsubsection*{Testabläufe für die 'Tagebuch erstellen'-Seite}
+- Überprüfen ob ein Fehler angezeigt wird, falls der Benutzername leer ist.\\
+- Überprüfen ob ein Fehler angezeigt wird, falls das Passwort leer ist.\\
+- Überprüfen ob ein Fehler angezeigt wird, falls die Passwörter nicht übereinstimmen.\\
+- Überprüfen ob ein Fehler angezeigt wird, falls das angegebene Benutzername bereits verwendet wird.\\
+- Überprüfen ob mit validen Daten ein Benutzer gelegt werden kann und ob nach der Registrierung, der Benutzer eingeloggt ist.
+
+\subsubsection*{Testabläufe für die 'Bildansicht'-Seite}
 - Überprüfen ob ein Fehler angezeigt wird, falls entry\_id nicht definiert ist.\\
 - Überprüfen ob ein Fehler angezeigt wird, falls entry\_id leer ist.\\
 - Überprüfen ob ein Fehler angezeigt wird, falls für das angegebene entry\_id kein Objekt existiert.\\
