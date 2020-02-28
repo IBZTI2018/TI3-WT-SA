@@ -48,9 +48,9 @@ use WTSA1\Models\Category;
 
             <div class="filter-row">
                 <div class="filter-col large">
-                    <label>Anzeigen an welchen Tagen keine Einträge vorhanden sind*</label>
+                    <label>Tage ohne Einträge*</label>
                     <br>
-                    <span class="info">*Funktioniert nur falls Datumsbereich definiert ist.</span>
+                    <span class="info">*Erfordert Datumsbereich</span>
                 </div>
                 <div class="filter-col small">
                     <input type="checkbox" name="show_days_with_no_entries" value="1" <?= isset($_REQUEST['show_days_with_no_entries']) ? 'checked' : '' ?>>
