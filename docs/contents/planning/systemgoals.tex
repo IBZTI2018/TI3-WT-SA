@@ -68,3 +68,66 @@ Die Ziele werden dabei in die Kategorien Framework (\textbf{F}), Sicherheit (\te
     Aktuelle Revision soll auf der Seite angezeigt werden &&&&&x \\
     ERM und Klassendiagramm soll verfügbar sein &&&&&x \\
 \end{longtable}
+
+\subsection{Lösungsfindung}
+Für die relevanten Kategorien wurden folgende Lösungsmöglichkeiten ausgearbeitet. Die Kategorien "Erfassung" und "Management" von Tagebucheinträgen wurden hierbei aussenvor gelassen, da diese Features mit jeder Lösung umgesetzt werden können und Aussagen im Bezug auf Komplexität und Entwicklungsgeschwindigkeit ohnehin auf diese Kategorien zutreffen.
+
+\vspace{5mm}
+
+\begin{tabular}{llll}
+    \textbf{Framework} & From-Scratch & Laravel & Eigenes-MVC \\
+    \textbf{Sicherheit} & From-Scratch & OAuth & JWT Provider \\
+    \textbf{Projekt} & Git + Trello & GitLab + CI & GitHub + Projects \\
+\end{tabular} 
+
+\vspace{5mm}
+
+\noindent
+\underline{\textbf{1: Enterprise}}: 
+Der Enterprise-Lösungsansatz verwendet ein vollwertiges \textbf{Laravel} Framework, sowie einen dedizierten \textbf{OAuth} Provider. Das Projekt wird in einem eigenen \textbf{GitLab} mit CI integriert.
+
+\vspace{2mm}
+\noindent
+\underline{\textbf{2: Pragmatisch}}: 
+Die pragmatische Lösung verwendet kein Framework sondern nur selbst \textbf{Fromn-Scratch} aufgebaute Scripts. Auch das Session-Handling wird \textbf{From-Scratch} implementiert. Zur Koordination wird Git mit Trello verwendet.
+
+\vspace{2mm}
+\noindent
+\underline{\textbf{3: Kleinprojekt}}: 
+Die Kleinprojekt-Lösung sieht die erstellung eines \textbf{Eigenen MVC} Frameworks zur einfachen Erweiterbarkeit vor. Das Session-Handling wird auch hier \textbf{From-Scratch} implementiert. Als Zusammenarbeitsplattform wird \textbf{GitHub} mit dem Projects-Feature verwendet.
+
+
+\begin{longtable}{ p{10cm}|c|c|ccc  }
+    \textbf{Ziel} & \textbf{M} & \textbf{W}& \textbf{1}& \textbf{2}& \textbf{3} \\
+    \hline
+    FA\_1.1 Tagebucheinträge müssen erfasst werden können & x & &x&x&x\\
+    FA\_1.2 Jeder Tagebucheintrag hat ein auswählbares Datum & x &&x&x&x \\
+    FA\_1.3 Jeder Tagebucheintrag kann einer Kategorie zugeordnet werden & x &&x&x&x \\
+    FA\_1.4 Zu jedem Eintrag kann ein Freitext inkl. Sonderzeichen von bis zu 1000 Zeichen erfasst werden. & x &&x&x&x \\
+    FA\_1.5 Zu jedem Eintrag kann ein Bild erfasst werden. & & 3 & 5(15)& 5(15)& 5(15)\\
+    FA\_1.8 Einträge können nach Datum gefiltert werden. & & 4 &5(20)&5(20)&5(20)\\
+    FA\_1.9 Einträge können nach Kategorie gefiltert werden. & & 4&5(20)&5(20)&5(20) \\
+    FA\_1.10 Es kann abgefragt werden, für welche Tage keine Tagebucheinträge vorhanden sind. & & 3&5(20)&5(20)&5(20) \\
+    FA\_1.11 Das Tagebuch ist mit einem Login geschützt. & x &&x&x&x \\
+    FA\_1.12 Ein Nutzer kann sich ein Login erstellen. & x & &x&x&x\\
+    NFA\_1.1 Das Tagebuch ist für unerfahrene Nutzer intuitiv zu bedienen & & 5 & 8(25) & 3(15) & 4(20) \\
+    NFA\_1.2 Das Tagebuch soll ein zeitgemässes Design besitzen & & 4 & 5(20)& 5(20)& 5(20) \\
+    FA\_1.6 Jeder Tagebucheintrag wird in der Datenbank gespeichert. &x & &x&x&x\\
+    FA\_1.7 Die Kategorien sind in der Datenbank gespeichert. & x&&x&x&x \\
+    FA\_1.13 Jeder User sieht nur seine eigenen Einträge & x &&x&x&x \\
+    NFA\_1.3 Das Tagebuch ist unter Windows und Linux lauffähig & & 4 & 5(20) & 4(16) & 5(20) \\
+    NFA\_1.4 Die Antwortszeigt des Tagebuchs liegt unter 3s & & 4 & 2(8) & 4(16) & 5(20) \\
+    NFA\_1.5 Das Tagebuch muss online sein & x & &x&x&x\\
+    Passwörter werden sicher gespeichert (PBKDF2 hash) & & 5  &5(25)&5(25)&5(25)\\
+    Die Dokumentation soll in \LaTeX geschrieben werden & & 3 & 5(15)& 5(15)& 5(15)\\
+    Es soll Versionskontrolle mit Git verwendet werden & & 5 & 5(25) &4 (20) &5(25)\\
+    Tests sollen in der Dokumentation ersichtlich sein & & 4 & 5(20)& 5(20)& 5(20) \\
+    Das gewählte System muss einfach erweiterbar sein & & 5 & 3(20) & 1(5) & 5(25)\\
+    Aktuelle Revision soll auf der Seite angezeigt werden & & 5 & 5(25)& 5(25)& 5(25)\\
+    ERM und Klassendiagramm soll verfügbar sein & & 4 &5(20)&5(20)&5(20)\\
+    \hline
+    &&&298&272&310
+\end{longtable}
+
+\noindent
+Die Lösung \textbf{3: Kleinprojekt} hat hier knapp die Nase vorn und lässt sich gut mit unserem agilen Ansatz verfolgen, weswegen diese Lösung nach sehr oberflächlicher Lösungssuche gewählt wurde.
