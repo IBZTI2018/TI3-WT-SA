@@ -8,6 +8,9 @@ docs/index.synctex.gz
 docs/index.toc
 docs/index.out
 
+# Ignore IDE configuration files
+.idea/
+
 # Ignore PHP composer dependencies
 vendor/
 
